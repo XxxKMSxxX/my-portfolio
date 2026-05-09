@@ -1,44 +1,111 @@
 ---
-const skillCategories = [
+interface Skill {
+  name: string;
+  url: string;
+  icon?: string;
+}
+
+interface SkillCategory {
+  title: string;
+  color: string;
+  items: Skill[];
+}
+
+const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     color: '#00f0ff',
-    items: ['TypeScript', 'Rust', 'Python', 'SQL', 'GLSL'],
+    items: [
+      { name: 'TypeScript', url: 'https://www.typescriptlang.org/', icon: 'i-simple-icons-typescript' },
+      { name: 'Rust', url: 'https://www.rust-lang.org/', icon: 'i-simple-icons-rust' },
+      { name: 'Python', url: 'https://www.python.org/', icon: 'i-simple-icons-python' },
+      { name: 'SQL', url: 'https://ja.wikipedia.org/wiki/SQL' },
+      { name: 'GLSL', url: 'https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language', icon: 'i-simple-icons-opengl' },
+    ],
   },
   {
     title: 'Frontend',
     color: '#8b5cf6',
-    items: ['React', 'Next.js', 'Astro', 'Vue.js', 'Tailwind CSS', 'Three.js / WebGL', 'Framer Motion'],
+    items: [
+      { name: 'React', url: 'https://react.dev/', icon: 'i-simple-icons-react' },
+      { name: 'Next.js', url: 'https://nextjs.org/', icon: 'i-simple-icons-nextdotjs' },
+      { name: 'Astro', url: 'https://astro.build/', icon: 'i-simple-icons-astro' },
+      { name: 'Vue.js', url: 'https://vuejs.org/', icon: 'i-simple-icons-vuedotjs' },
+      { name: 'Tailwind CSS', url: 'https://tailwindcss.com/', icon: 'i-simple-icons-tailwindcss' },
+      { name: 'Three.js', url: 'https://threejs.org/', icon: 'i-simple-icons-threedotjs' },
+      { name: 'Framer Motion', url: 'https://www.framer.com/motion/', icon: 'i-simple-icons-framer' },
+    ],
   },
   {
     title: 'Backend',
     color: '#f472b6',
-    items: ['Node.js', 'FastAPI', 'axum', 'GraphQL', 'gRPC', 'WebSocket'],
+    items: [
+      { name: 'Node.js', url: 'https://nodejs.org/', icon: 'i-simple-icons-nodedotjs' },
+      { name: 'FastAPI', url: 'https://fastapi.tiangolo.com/', icon: 'i-simple-icons-fastapi' },
+      { name: 'axum', url: 'https://github.com/tokio-rs/axum' },
+      { name: 'GraphQL', url: 'https://graphql.org/', icon: 'i-simple-icons-graphql' },
+      { name: 'gRPC', url: 'https://grpc.io/' },
+      { name: 'WebSocket', url: 'https://developer.mozilla.org/docs/Web/API/WebSockets_API' },
+    ],
   },
   {
     title: 'AI / ML',
     color: '#00f0ff',
-    items: ['AWS Bedrock (Claude)', 'LangChain', 'SageMaker', 'pgvector', 'LSTM / Attention', 'MCP Server'],
+    items: [
+      { name: 'AWS Bedrock', url: 'https://aws.amazon.com/bedrock/', icon: 'i-simple-icons-amazonaws' },
+      { name: 'LangChain', url: 'https://www.langchain.com/', icon: 'i-simple-icons-langchain' },
+      { name: 'SageMaker', url: 'https://aws.amazon.com/sagemaker/', icon: 'i-simple-icons-amazonaws' },
+      { name: 'pgvector', url: 'https://github.com/pgvector/pgvector' },
+      { name: 'LSTM / Attention', url: 'https://pytorch.org/', icon: 'i-simple-icons-pytorch' },
+      { name: 'MCP Server', url: 'https://modelcontextprotocol.io/', icon: 'i-simple-icons-anthropic' },
+    ],
   },
   {
     title: 'Database',
     color: '#8b5cf6',
-    items: ['PostgreSQL', 'Turso (libSQL)', 'DuckDB', 'TimescaleDB', 'Redis', 'Drizzle ORM', 'Prisma'],
+    items: [
+      { name: 'PostgreSQL', url: 'https://www.postgresql.org/', icon: 'i-simple-icons-postgresql' },
+      { name: 'Turso', url: 'https://turso.tech/', icon: 'i-simple-icons-turso' },
+      { name: 'DuckDB', url: 'https://duckdb.org/', icon: 'i-simple-icons-duckdb' },
+      { name: 'TimescaleDB', url: 'https://www.timescale.com/', icon: 'i-simple-icons-timescale' },
+      { name: 'Redis', url: 'https://redis.io/', icon: 'i-simple-icons-redis' },
+      { name: 'Drizzle ORM', url: 'https://orm.drizzle.team/', icon: 'i-simple-icons-drizzle' },
+      { name: 'Prisma', url: 'https://www.prisma.io/', icon: 'i-simple-icons-prisma' },
+    ],
   },
   {
     title: 'Infrastructure',
     color: '#f472b6',
-    items: ['AWS (EKS, ECS, RDS, S3, Lambda)', 'Terraform', 'Kubernetes', 'ArgoCD', 'Docker', 'GitHub Actions'],
+    items: [
+      { name: 'AWS', url: 'https://aws.amazon.com/', icon: 'i-simple-icons-amazonaws' },
+      { name: 'Terraform', url: 'https://www.terraform.io/', icon: 'i-simple-icons-terraform' },
+      { name: 'Kubernetes', url: 'https://kubernetes.io/', icon: 'i-simple-icons-kubernetes' },
+      { name: 'ArgoCD', url: 'https://argoproj.github.io/cd/', icon: 'i-simple-icons-argo' },
+      { name: 'Docker', url: 'https://www.docker.com/', icon: 'i-simple-icons-docker' },
+      { name: 'GitHub Actions', url: 'https://github.com/features/actions', icon: 'i-simple-icons-githubactions' },
+    ],
   },
   {
     title: 'Data Pipeline',
     color: '#00f0ff',
-    items: ['Meltano', 'dbt', 'Apache Airflow', 'Great Expectations', 'Medallion Architecture'],
+    items: [
+      { name: 'Meltano', url: 'https://meltano.com/', icon: 'i-simple-icons-meltano' },
+      { name: 'dbt', url: 'https://www.getdbt.com/', icon: 'i-simple-icons-dbt' },
+      { name: 'Apache Airflow', url: 'https://airflow.apache.org/', icon: 'i-simple-icons-apacheairflow' },
+      { name: 'Great Expectations', url: 'https://greatexpectations.io/' },
+      { name: 'Medallion Arch.', url: 'https://www.databricks.com/glossary/medallion-architecture', icon: 'i-simple-icons-databricks' },
+    ],
   },
   {
     title: 'Blockchain',
     color: '#8b5cf6',
-    items: ['Solana / Anchor', 'Flash Loan', 'DEX Integration', 'Jito (MEV)', 'Yellowstone gRPC'],
+    items: [
+      { name: 'Solana', url: 'https://solana.com/', icon: 'i-simple-icons-solana' },
+      { name: 'Anchor', url: 'https://www.anchor-lang.com/' },
+      { name: 'Flash Loan', url: 'https://docs.aave.com/developers/guides/flash-loans' },
+      { name: 'Jito (MEV)', url: 'https://www.jito.network/' },
+      { name: 'Yellowstone gRPC', url: 'https://github.com/rpcpool/yellowstone-grpc' },
+    ],
   },
 ];
 ---
@@ -81,10 +148,24 @@ const skillCategories = [
                 {cat.title}
               </h3>
             </div>
-            <ul class="space-y-2">
+            <ul class="space-y-1.5">
               {cat.items.map(item => (
-                <li class="text-sm text-white/40 hover:text-white/60 transition-colors duration-300">
-                  {item}
+                <li>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="skill-link flex items-center gap-2.5 py-1.5 px-2 -mx-2 rounded-md text-sm text-white/40 hover:text-white/80 hover:bg-white/[0.03] transition-all duration-300"
+                  >
+                    {item.icon ? (
+                      <span class={`${item.icon} text-base flex-shrink-0 opacity-40 group-hover:opacity-60`} style={`color: ${cat.color};`}></span>
+                    ) : (
+                      <span class="w-4 h-4 flex items-center justify-center flex-shrink-0">
+                        <span class="block w-1 h-1 rounded-full opacity-30" style={`background: ${cat.color};`}></span>
+                      </span>
+                    )}
+                    <span>{item.name}</span>
+                  </a>
                 </li>
               ))}
             </ul>

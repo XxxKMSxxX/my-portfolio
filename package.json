@@ -18,6 +18,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@iconify-json/carbon": "^1.2.21",
+    "@iconify-json/simple-icons": "^1.2.81",
     "@types/three": "^0.184.1",
     "@unocss/astro": "^66.6.8",
     "@unocss/preset-attributify": "^66.6.8",

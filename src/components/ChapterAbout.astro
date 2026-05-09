@@ -12,16 +12,39 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-5 gap-12 md:gap-16">
-      <!-- Left column -->
-      <div class="md:col-span-3">
-        <h2 class="cin-reveal font-heading text-3xl md:text-5xl font-bold leading-tight mb-8">
+    <!-- Profile photo + heading -->
+    <div class="cin-reveal flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+      <div class="relative flex-shrink-0">
+        <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-white/10 shadow-[0_0_40px_rgba(0,240,255,0.08)]">
+          <picture>
+            <source srcset="/images/profile.avif" type="image/avif" />
+            <img
+              src="/images/profile.jpg"
+              alt="Kimura Shun"
+              width="144"
+              height="144"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+        <!-- Accent ring -->
+        <div class="absolute inset-0 rounded-full border border-[#00f0ff]/20 scale-110"></div>
+      </div>
+      <div class="text-center md:text-left">
+        <h2 class="font-heading text-3xl md:text-5xl font-bold leading-tight mb-3">
           コードで描く、<br />
           <span class="bg-gradient-to-r from-[#00f0ff] to-[#8b5cf6] bg-clip-text" style="color: transparent; -webkit-background-clip: text;">
             未来の設計図
           </span>
         </h2>
+        <p class="text-sm text-white/25 tracking-wider">Full-Stack Engineer &times; AI Architect</p>
+      </div>
+    </div>
 
+    <div class="grid md:grid-cols-5 gap-12 md:gap-16">
+      <!-- Left column -->
+      <div class="md:col-span-3">
         <div class="space-y-6 text-white/45 leading-relaxed">
           <p class="cin-reveal cin-delay-1">
             SIer・コンサルティングファームを経て、大規模プラットフォームの設計・構築・運用に一貫して携わってきました。
