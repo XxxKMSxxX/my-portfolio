@@ -1,0 +1,139 @@
+---
+---
+
+<section id="about" class="relative py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- Left: 3D Scene -->
+      <div class="reveal">
+        <div class="relative aspect-square max-w-md mx-auto">
+          <canvas id="about-canvas" class="w-full h-full rounded-2xl"></canvas>
+          <div class="absolute inset-0 rounded-2xl border border-white/5"></div>
+        </div>
+      </div>
+
+      <!-- Right: Text -->
+      <div>
+        <p class="reveal text-[#00f0ff] text-sm tracking-[0.3em] uppercase mb-4 font-heading">About Me</p>
+        <h2 class="reveal reveal-delay-1 font-heading text-4xl md:text-5xl font-bold mb-6">
+          デジタルの世界に<br />
+          <span class="bg-gradient-to-r from-[#00f0ff] to-[#8b5cf6] bg-clip-text" style="color: transparent; -webkit-background-clip: text;">
+            命を吹き込む
+          </span>
+        </h2>
+        <p class="reveal reveal-delay-2 text-white/50 leading-relaxed mb-6">
+          フロントエンド開発を中心に、3Dグラフィックス、インタラクティブデザイン、
+          パフォーマンス最適化に情熱を持つクリエイティブエンジニアです。
+          テクノロジーとデザインの融合で、ユーザーの心に残る体験を創り出します。
+        </p>
+        <p class="reveal reveal-delay-3 text-white/50 leading-relaxed mb-8">
+          常に最新技術を追求し、WebGL、シェーダープログラミング、
+          モーションデザインなどの分野で日々スキルを磨いています。
+        </p>
+        <div class="reveal reveal-delay-4 flex items-center gap-6">
+          <div class="text-center">
+            <p class="font-heading text-3xl font-bold text-[#00f0ff]">5+</p>
+            <p class="text-xs text-white/40 mt-1 uppercase tracking-wider">Years Exp</p>
+          </div>
+          <div class="w-px h-12 bg-white/10"></div>
+          <div class="text-center">
+            <p class="font-heading text-3xl font-bold text-[#8b5cf6]">50+</p>
+            <p class="text-xs text-white/40 mt-1 uppercase tracking-wider">Projects</p>
+          </div>
+          <div class="w-px h-12 bg-white/10"></div>
+          <div class="text-center">
+            <p class="font-heading text-3xl font-bold text-[#f472b6]">30+</p>
+            <p class="text-xs text-white/40 mt-1 uppercase tracking-wider">Clients</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import * as THREE from 'three';
+
+  function initAboutScene() {
+    const canvas = document.getElementById('about-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(rect.width, rect.height);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 100);
+    camera.position.z = 5;
+
+    // Torus knot
+    const geometry = new THREE.TorusKnotGeometry(1.2, 0.4, 128, 32);
+    const material = new THREE.MeshStandardMaterial({
+      color: '#8b5cf6',
+      metalness: 0.9,
+      roughness: 0.1,
+      wireframe: false,
+    });
+    const torusKnot = new THREE.Mesh(geometry, material);
+    scene.add(torusKnot);
+
+    // Wireframe overlay
+    const wireframeMat = new THREE.MeshBasicMaterial({
+      color: '#00f0ff',
+      wireframe: true,
+      transparent: true,
+      opacity: 0.08,
+    });
+    const wireframe = new THREE.Mesh(geometry, wireframeMat);
+    scene.add(wireframe);
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight('#1a1a2e', 0.5);
+    scene.add(ambientLight);
+
+    const pointLight1 = new THREE.PointLight('#00f0ff', 2, 20);
+    pointLight1.position.set(3, 3, 3);
+    scene.add(pointLight1);
+
+    const pointLight2 = new THREE.PointLight('#8b5cf6', 2, 20);
+    pointLight2.position.set(-3, -2, 2);
+    scene.add(pointLight2);
+
+    const pointLight3 = new THREE.PointLight('#f472b6', 1.5, 20);
+    pointLight3.position.set(0, -3, 4);
+    scene.add(pointLight3);
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsed = clock.getElapsedTime();
+
+      torusKnot.rotation.x = elapsed * 0.3;
+      torusKnot.rotation.y = elapsed * 0.2;
+      wireframe.rotation.x = elapsed * 0.3;
+      wireframe.rotation.y = elapsed * 0.2;
+
+      pointLight1.position.x = Math.sin(elapsed * 0.5) * 4;
+      pointLight1.position.z = Math.cos(elapsed * 0.5) * 4;
+      pointLight2.position.y = Math.sin(elapsed * 0.3) * 3;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+    });
+    resizeObserver.observe(canvas);
+  }
+
+  initAboutScene();
+</script>

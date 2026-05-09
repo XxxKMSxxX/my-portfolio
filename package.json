@@ -12,10 +12,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.3.1"
+    "astro": "^6.3.1",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@iconify-json/carbon": "^1.2.21",
+    "@types/three": "^0.184.1",
     "@unocss/astro": "^66.6.8",
     "@unocss/preset-attributify": "^66.6.8",
     "@unocss/preset-icons": "^66.6.8",

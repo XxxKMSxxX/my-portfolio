@@ -1,0 +1,78 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#" class="font-heading text-xl font-bold tracking-tight">
+      <span class="text-[#00f0ff]">&lt;</span>Portfolio<span class="text-[#00f0ff]">/&gt;</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class="text-sm text-white/60 hover:text-[#00f0ff] transition-colors duration-300 tracking-wide uppercase"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <button
+      id="menu-toggle"
+      class="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+      aria-label="Toggle menu"
+    >
+      <span class="block w-6 h-0.5 bg-white/80 transition-all duration-300" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-white/80 transition-all duration-300" id="bar2"></span>
+      <span class="block w-4 h-0.5 bg-white/80 transition-all duration-300 ml-auto" id="bar3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full bg-[#050505]/95 backdrop-blur-xl border-b border-white/5">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class="mobile-link text-base text-white/60 hover:text-[#00f0ff] transition-colors duration-300 tracking-wide uppercase"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  let scrolled = false;
+  window.addEventListener('scroll', () => {
+    const isScrolled = window.scrollY > 50;
+    if (isScrolled !== scrolled) {
+      scrolled = isScrolled;
+      if (navbar) {
+        navbar.style.background = scrolled ? 'rgba(5, 5, 5, 0.85)' : 'transparent';
+        navbar.style.backdropFilter = scrolled ? 'blur(20px)' : 'none';
+        navbar.style.borderBottom = scrolled ? '1px solid rgba(255,255,255,0.05)' : 'none';
+      }
+    }
+  });
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>
