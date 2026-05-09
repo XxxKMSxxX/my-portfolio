@@ -12,69 +12,288 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Creative Developer Portfolio" />
+    <meta name="description" content="Kimura Shun - Co-Founder, CPO & CTO at AI Hikari, Inc. Full-Stack Engineer × AI Architect" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
-  <body class="bg-[#050505] text-white font-sans antialiased overflow-x-hidden" style="font-family: 'Inter', sans-serif;">
+  <body>
+    <!-- Custom cursor -->
+    <div id="cursor" class="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block">
+      <div id="cursor-dot" class="w-2 h-2 bg-[#00f0ff] rounded-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-100"></div>
+      <div id="cursor-ring" class="absolute top-1/2 left-1/2 w-10 h-10 border border-[#00f0ff]/30 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300"></div>
+    </div>
+
+    <!-- Film grain overlay -->
+    <div id="grain" class="fixed inset-0 pointer-events-none z-[9998] opacity-[0.04]"></div>
+
+    <!-- Letterbox bars (cinematic) -->
+    <div class="fixed top-0 left-0 w-full h-[3vh] bg-[#020202] z-[100]"></div>
+    <div class="fixed bottom-0 left-0 w-full h-[3vh] bg-[#020202] z-[100]"></div>
+
+    <!-- Progress bar -->
+    <div class="fixed top-0 left-0 w-full h-[3vh] z-[101] flex items-end">
+      <div id="progress-bar" class="h-px bg-gradient-to-r from-[#00f0ff] via-[#8b5cf6] to-[#f472b6] transition-none" style="width: 0%;"></div>
+    </div>
+
+    <!-- Chapter indicator -->
+    <nav id="chapter-nav" class="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-end gap-4">
+      <a href="#prologue" class="chapter-dot group flex items-center gap-3" data-section="prologue">
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Top</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+      </a>
+      <a href="#about" class="chapter-dot group flex items-center gap-3" data-section="about">
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">About</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+      </a>
+      <a href="#company" class="chapter-dot group flex items-center gap-3" data-section="company">
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Vision</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+      </a>
+      <a href="#projects" class="chapter-dot group flex items-center gap-3" data-section="projects">
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Works</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+      </a>
+      <a href="#epilogue" class="chapter-dot group flex items-center gap-3" data-section="epilogue">
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Contact</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+      </a>
+    </nav>
+
     <slot />
   </body>
 </html>
 
 <style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #020202;
+    color: #fff;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    cursor: none;
   }
 
-  html {
-    scroll-behavior: smooth;
+  @media (max-width: 768px) {
+    body { cursor: auto; }
   }
+
+  html { scroll-behavior: auto; }
 
   ::selection {
-    background: rgba(0, 240, 255, 0.3);
+    background: rgba(0, 240, 255, 0.2);
     color: #fff;
   }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
+  ::-webkit-scrollbar { width: 0; }
 
-  ::-webkit-scrollbar-track {
-    background: #050505;
-  }
+  .font-heading { font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif; }
 
-  ::-webkit-scrollbar-thumb {
-    background: rgba(0, 240, 255, 0.3);
-    border-radius: 3px;
-  }
-
-  .font-heading {
-    font-family: 'Space Grotesk', sans-serif;
-  }
-
-  /* Scroll-triggered animation */
-  .reveal {
+  /* ---- Cinematic reveals ---- */
+  .cin-reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(60px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  .reveal.visible {
+  .cin-reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
+  .cin-delay-1 { transition-delay: 0.15s; }
+  .cin-delay-2 { transition-delay: 0.3s; }
+  .cin-delay-3 { transition-delay: 0.45s; }
+  .cin-delay-4 { transition-delay: 0.6s; }
+  .cin-delay-5 { transition-delay: 0.75s; }
+  .cin-delay-6 { transition-delay: 0.9s; }
 
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-  .reveal-delay-5 { transition-delay: 0.5s; }
+  /* ---- Split text characters ---- */
+  .split-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) rotateX(-40deg);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .split-char.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+
+  /* ---- Chapter title card ---- */
+  .chapter-card {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .chapter-card.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ---- Horizontal line reveal ---- */
+  .line-reveal {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .line-reveal.visible {
+    transform: scaleX(1);
+  }
+
+  /* ---- Glow text ---- */
+  .glow-text {
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.3), 0 0 60px rgba(0, 240, 255, 0.1);
+  }
+
+  /* ---- Active chapter dot ---- */
+  .chapter-dot.active span:last-child {
+    background: #00f0ff !important;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .chapter-dot.active span:first-child {
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
 </style>
+
+<script>
+  // ---- Custom cursor ----
+  const cursor = document.getElementById('cursor');
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, cx = 0, cy = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  function animateCursor() {
+    cx += (mx - cx) * 0.15;
+    cy += (my - cy) * 0.15;
+    if (cursor) {
+      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+    }
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Magnetic effect on interactive elements
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      if (ring) {
+        ring.style.width = '50px';
+        ring.style.height = '50px';
+        ring.style.borderColor = 'rgba(0, 240, 255, 0.6)';
+      }
+      if (dot) dot.style.transform = 'translate(-50%, -50%) scale(2)';
+    });
+    el.addEventListener('mouseleave', () => {
+      if (ring) {
+        ring.style.width = '40px';
+        ring.style.height = '40px';
+        ring.style.borderColor = 'rgba(0, 240, 255, 0.3)';
+      }
+      if (dot) dot.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+  });
+
+  // ---- Film grain ----
+  const grainCanvas = document.createElement('canvas');
+  const grainCtx = grainCanvas.getContext('2d');
+  grainCanvas.width = 256;
+  grainCanvas.height = 256;
+  const grainEl = document.getElementById('grain');
+
+  function renderGrain() {
+    if (!grainCtx) return;
+    const imageData = grainCtx.createImageData(256, 256);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      const v = Math.random() * 255;
+      imageData.data[i] = v;
+      imageData.data[i + 1] = v;
+      imageData.data[i + 2] = v;
+      imageData.data[i + 3] = 255;
+    }
+    grainCtx.putImageData(imageData, 0, 0);
+    if (grainEl) {
+      grainEl.style.backgroundImage = `url(${grainCanvas.toDataURL()})`;
+      grainEl.style.backgroundSize = '256px 256px';
+    }
+  }
+
+  // Update grain every 100ms for animation
+  setInterval(renderGrain, 100);
+  renderGrain();
+
+  // ---- Progress bar ----
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (progressBar) progressBar.style.width = `${progress}%`;
+  });
+
+  // ---- Chapter nav active state ----
+  const sections = document.querySelectorAll('section[id]');
+  const dots = document.querySelectorAll('.chapter-dot');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        dots.forEach(d => {
+          d.classList.toggle('active', d.getAttribute('data-section') === id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => navObserver.observe(s));
+
+  // ---- Cinematic reveal observer ----
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.cin-reveal, .chapter-card, .line-reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // ---- Split text animation ----
+  document.querySelectorAll('[data-split]').forEach(el => {
+    const text = el.textContent ?? '';
+    el.textContent = '';
+    text.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.className = 'split-char';
+      span.style.transitionDelay = `${i * 0.03}s`;
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      el.appendChild(span);
+    });
+
+    const splitObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.split-char').forEach(ch => {
+            ch.classList.add('visible');
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    splitObserver.observe(el);
+  });
+</script>

@@ -1,36 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import Projects from '../components/Projects.astro';
-import Contact from '../components/Contact.astro';
+import CinematicScene from '../components/CinematicScene.astro';
+import Prologue from '../components/Prologue.astro';
+import ChapterAbout from '../components/ChapterAbout.astro';
+import ChapterCompany from '../components/ChapterCompany.astro';
+import ChapterProjects from '../components/ChapterProjects.astro';
+import Epilogue from '../components/Epilogue.astro';
 ---
 
-<Layout title="Portfolio | Creative Developer">
-  <Navbar />
-  <Hero />
-  <About />
-  <Skills />
-  <Projects />
-  <Contact />
+<Layout title="Kimura Shun | CPO & CTO — AI Hikari, Inc.">
+  <!-- Continuous 3D background -->
+  <CinematicScene />
+
+  <!-- Content layers -->
+  <main class="relative z-10">
+    <Prologue />
+    <ChapterAbout />
+    <ChapterCompany />
+    <ChapterProjects />
+    <Epilogue />
+  </main>
 </Layout>
-
-<script>
-  // Scroll reveal animations
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
-  );
-
-  document.querySelectorAll('.reveal').forEach((el) => {
-    observer.observe(el);
-  });
-</script>

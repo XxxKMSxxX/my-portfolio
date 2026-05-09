@@ -1,0 +1,51 @@
+---
+---
+
+<section id="prologue" class="relative min-h-[150vh] flex items-center justify-center">
+  <div class="relative z-10 text-center px-6 max-w-5xl" style="margin-top: -20vh;">
+    <!-- Overline -->
+    <div class="cin-reveal mb-6">
+      <span class="inline-block text-[10px] md:text-xs tracking-[0.5em] uppercase text-white/30 border border-white/10 px-4 py-1.5 rounded-full">
+        Co-Founder, CPO & CTO — AI Hikari, Inc.
+      </span>
+    </div>
+
+    <!-- Name -->
+    <h1 class="font-heading text-6xl md:text-8xl lg:text-[10rem] font-bold leading-[0.9] mb-4">
+      <span data-split class="block glow-text">Kimura</span>
+      <span data-split class="block bg-gradient-to-r from-[#00f0ff] via-[#8b5cf6] to-[#f472b6] bg-clip-text" style="color: transparent; -webkit-background-clip: text;">
+        Shun
+      </span>
+    </h1>
+
+    <!-- Japanese name -->
+    <div class="cin-reveal cin-delay-3 mb-8">
+      <span class="text-lg md:text-xl text-white/30 font-light tracking-[0.3em]">木村 俊</span>
+    </div>
+
+    <!-- Tagline -->
+    <p class="cin-reveal cin-delay-4 text-base md:text-lg text-white/40 max-w-xl mx-auto leading-relaxed mb-12">
+      テクノロジーで未来のサプライチェーンを再定義する<br class="hidden md:block" />
+      フルスタックエンジニア × AIアーキテクト
+    </p>
+
+    <!-- Scroll cue -->
+    <div class="cin-reveal cin-delay-5 flex flex-col items-center gap-3">
+      <span class="text-[10px] tracking-[0.4em] uppercase text-white/20">Scroll to explore</span>
+      <div class="w-px h-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#00f0ff]/40 to-transparent animate-scroll-cue"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scrollCue {
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+  }
+  .animate-scroll-cue {
+    animation: scrollCue 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+</style>
