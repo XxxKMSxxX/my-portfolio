@@ -1,0 +1,96 @@
+---
+const skillCategories = [
+  {
+    title: 'Languages',
+    color: '#00f0ff',
+    items: ['TypeScript', 'Rust', 'Python', 'SQL', 'GLSL'],
+  },
+  {
+    title: 'Frontend',
+    color: '#8b5cf6',
+    items: ['React', 'Next.js', 'Astro', 'Vue.js', 'Tailwind CSS', 'Three.js / WebGL', 'Framer Motion'],
+  },
+  {
+    title: 'Backend',
+    color: '#f472b6',
+    items: ['Node.js', 'FastAPI', 'axum', 'GraphQL', 'gRPC', 'WebSocket'],
+  },
+  {
+    title: 'AI / ML',
+    color: '#00f0ff',
+    items: ['AWS Bedrock (Claude)', 'LangChain', 'SageMaker', 'pgvector', 'LSTM / Attention', 'MCP Server'],
+  },
+  {
+    title: 'Database',
+    color: '#8b5cf6',
+    items: ['PostgreSQL', 'Turso (libSQL)', 'DuckDB', 'TimescaleDB', 'Redis', 'Drizzle ORM', 'Prisma'],
+  },
+  {
+    title: 'Infrastructure',
+    color: '#f472b6',
+    items: ['AWS (EKS, ECS, RDS, S3, Lambda)', 'Terraform', 'Kubernetes', 'ArgoCD', 'Docker', 'GitHub Actions'],
+  },
+  {
+    title: 'Data Pipeline',
+    color: '#00f0ff',
+    items: ['Meltano', 'dbt', 'Apache Airflow', 'Great Expectations', 'Medallion Architecture'],
+  },
+  {
+    title: 'Blockchain',
+    color: '#8b5cf6',
+    items: ['Solana / Anchor', 'Flash Loan', 'DEX Integration', 'Jito (MEV)', 'Yellowstone gRPC'],
+  },
+];
+---
+
+<section id="skills" class="relative min-h-screen py-40 px-6">
+  <!-- Chapter title card -->
+  <div class="max-w-6xl mx-auto mb-20">
+    <div class="chapter-card flex items-center gap-6 mb-16">
+      <span class="font-heading text-7xl md:text-9xl font-bold text-white/[0.03]">02</span>
+      <div>
+        <div class="line-reveal w-12 h-px bg-[#8b5cf6] mb-3"></div>
+        <span class="text-[10px] tracking-[0.4em] uppercase text-[#8b5cf6]">Arsenal</span>
+      </div>
+    </div>
+
+    <h2 class="cin-reveal font-heading text-3xl md:text-5xl font-bold mb-6">
+      Tech Stack
+    </h2>
+    <p class="cin-reveal cin-delay-1 text-white/35 max-w-xl mb-20">
+      フロントエンドからインフラ、AI、ブロックチェーンまで。<br />
+      プロダクトに必要な技術を横断的に扱います。
+    </p>
+  </div>
+
+  <!-- Skills grid -->
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {skillCategories.map((cat, idx) => (
+      <div class={`cin-reveal cin-delay-${Math.min(idx + 1, 6)}`}>
+        <div class="group relative p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-500 h-full">
+          <!-- Hover glow -->
+          <div
+            class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={`background: radial-gradient(circle at 50% 0%, ${cat.color}08, transparent 70%);`}
+          ></div>
+
+          <div class="relative">
+            <div class="flex items-center gap-2 mb-5">
+              <div class="w-1.5 h-1.5 rounded-full" style={`background: ${cat.color};`}></div>
+              <h3 class="text-xs tracking-[0.2em] uppercase font-medium" style={`color: ${cat.color};`}>
+                {cat.title}
+              </h3>
+            </div>
+            <ul class="space-y-2">
+              {cat.items.map(item => (
+                <li class="text-sm text-white/40 hover:text-white/60 transition-colors duration-300">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

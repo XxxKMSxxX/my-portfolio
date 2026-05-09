@@ -1,60 +1,53 @@
 ---
 const projects = [
   {
-    id: 'oversee',
-    type: 'Professional',
-    title: 'OVERSEE Platform',
-    subtitle: '次世代予測AIエージェント',
-    description: 'サプライチェーンの需要予測をAIエージェントが変革する。対話型インターフェースで市場データと予測モデルを統合し、意思決定を加速。',
+    id: 'demand-forecast',
+    title: 'Demand Forecast AI Agent',
+    subtitle: '需要予測AIエージェントプラットフォーム',
+    description: '対話型インターフェースで市場データと予測モデルを統合し、サプライチェーンの意思決定を加速するAIエージェント基盤。',
     tags: ['Next.js', 'FastAPI', 'AWS EKS', 'SageMaker', 'Terraform', 'ArgoCD'],
     color: '#8b5cf6',
     gradient: 'from-[#1a0a2e] to-[#0a1628]',
   },
   {
-    id: 'trade-nav',
-    type: 'Professional',
-    title: 'Trade Navigator',
+    id: 'trade-ai',
+    title: 'International Trade AI',
     subtitle: '国際貿易AIプラットフォーム',
     description: 'HSコード分類、関税計算、FTA活用判断、規制チェックをAIが一括処理。国際貿易の複雑な意思決定を秒速に。',
-    tags: ['Next.js 16', 'Turso', 'Claude Haiku', 'Drizzle ORM'],
+    tags: ['Next.js', 'Turso', 'Claude AI', 'Drizzle ORM'],
     color: '#00f0ff',
     gradient: 'from-[#0a1628] to-[#0a1e1e]',
   },
   {
     id: 'arbitrage',
-    type: 'Personal',
-    title: 'Solana DEX Arbitrage',
+    title: 'DEX Arbitrage Bot',
     subtitle: 'アトミックアービトラージBot',
-    description: '13のDEXを横断するSolana上のアービトラージBot。Rust × Anchorで構築、Flash Loan、DirectCPI、Jito統合による高速実行。',
+    description: '13のDEXを横断するブロックチェーン上のアービトラージBot。Rust × Anchorで構築、Flash Loan・MEV統合による高速実行。',
     tags: ['Rust', 'Anchor', 'Solana', 'gRPC', 'Prometheus'],
     color: '#f472b6',
     gradient: 'from-[#2a0a1e] to-[#1a0a2e]',
   },
   {
-    id: 'pettas',
-    type: 'Personal',
-    title: 'PETTAS',
-    subtitle: 'ペットケア記録PWA',
-    description: '投薬・通院・健康記録を家族で共有するPWA。Claude AIによる健康レポート自動生成、プッシュ通知でリマインド。',
-    tags: ['Next.js 16', 'Turso', 'Claude AI', 'PWA'],
+    id: 'pet-app',
+    title: 'Pet Care PWA',
+    subtitle: 'ペットケア記録アプリ',
+    description: '投薬・通院・健康記録を家族で共有するPWA。AIによる健康レポート自動生成、プッシュ通知でリマインド。',
+    tags: ['Next.js', 'Turso', 'Claude AI', 'PWA', 'Web Push'],
     color: '#00f0ff',
     gradient: 'from-[#0a1e1e] to-[#0a1628]',
-    url: 'https://pettas.tech',
   },
   {
-    id: 'propscout',
-    type: 'Personal',
-    title: 'PropScout JP',
+    id: 'realestate',
+    title: 'Real Estate Risk Analyzer',
     subtitle: '不動産リスク分析AI',
-    description: '国土交通省オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。MCP Serverも構築。',
-    tags: ['Python', 'ML', '国交省API', 'MCP Server'],
+    description: '政府オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。MCP Serverも構築。',
+    tags: ['Python', 'ML', 'Gov API', 'MCP Server'],
     color: '#8b5cf6',
     gradient: 'from-[#1a0a2e] to-[#2a0a1e]',
   },
   {
     id: 'agent-platform',
-    type: 'Professional',
-    title: 'AI Agent Platform',
+    title: 'AI Agent Runtime',
     subtitle: '自律実行AIエージェント基盤',
     description: 'Rust × axum × WASMで構築した自律AIエージェント実行基盤。マルチクレート構成で拡張性と安全性を両立。',
     tags: ['Rust', 'axum', 'WASM', 'PostgreSQL', 'pgvector'],
@@ -79,7 +72,7 @@ const projects = [
       Selected Projects
     </h2>
     <p class="cin-reveal cin-delay-1 text-white/35 max-w-xl mb-20">
-      プロフェッショナルワークから個人開発まで、技術の可能性に挑み続けるプロジェクト群。
+      業務から個人開発まで、技術の可能性に挑み続けるプロジェクト群。
     </p>
   </div>
 
@@ -93,15 +86,6 @@ const projects = [
             <div class={`relative aspect-[16/10] rounded-xl overflow-hidden border border-white/5 bg-gradient-to-br ${project.gradient}`}>
               <canvas class="project-3d-canvas w-full h-full" data-color={project.color} data-idx={idx}></canvas>
               <div class="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent"></div>
-              {/* Type badge */}
-              <div class="absolute top-4 left-4">
-                <span
-                  class="text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border"
-                  style={`color: ${project.color}; border-color: ${project.color}30; background: ${project.color}10;`}
-                >
-                  {project.type}
-                </span>
-              </div>
             </div>
           </div>
 
@@ -125,17 +109,6 @@ const projects = [
                 </span>
               ))}
             </div>
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={`inline-flex items-center gap-2 mt-4 text-xs tracking-wider uppercase transition-colors duration-300 hover:opacity-80`}
-                style={`color: ${project.color};`}
-              >
-                Visit Site →
-              </a>
-            )}
           </div>
         </div>
       </article>
@@ -165,7 +138,6 @@ const projects = [
       const group = new THREE.Group();
       scene.add(group);
 
-      // Scattered wireframe shapes
       const shapes = [
         new THREE.IcosahedronGeometry(0.5, 0),
         new THREE.OctahedronGeometry(0.4, 0),
@@ -193,7 +165,6 @@ const projects = [
         group.add(line);
       }
 
-      // Particles
       const pCount = 100;
       const pGeo = new THREE.BufferGeometry();
       const pPos = new Float32Array(pCount * 3);
