@@ -22,12 +22,14 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <!-- Custom cursor (mix-blend-mode: difference) -->
+    <!-- Custom cursor -->
     <div id="cursor" class="cursor-wrap hidden md:block">
-      <div id="cursor-bg"></div>
+      <div id="cursor-inner">
+        <span id="cursor-text" class="cursor-text"></span>
+      </div>
     </div>
 
-    <!-- Film grain: SVG feTurbulence -->
+    <!-- Film grain -->
     <svg class="absolute w-0 h-0" aria-hidden="true">
       <filter id="grain-noise">
         <feTurbulence baseFrequency="0.65" numOctaves="3" seed="1" stitchTiles="stitch" type="fractalNoise" />
@@ -36,36 +38,32 @@ const { title } = Astro.props;
     </svg>
     <div class="grain-overlay"></div>
 
-    <!-- Letterbox bars -->
-    <div class="fixed top-0 left-0 w-full h-[2.5vh] bg-[#020202] z-[100]"></div>
-    <div class="fixed bottom-0 left-0 w-full h-[2.5vh] bg-[#020202] z-[100]"></div>
-
-    <!-- Progress bar -->
-    <div class="fixed top-0 left-0 w-full h-[2.5vh] z-[101] flex items-end">
-      <div id="progress-bar" class="h-px bg-gradient-to-r from-[#00f0ff] via-[#8b5cf6] to-[#f472b6] transition-none" style="width: 0%;"></div>
+    <!-- Progress bar (thin, top) -->
+    <div class="fixed top-0 left-0 w-full z-[101] flex items-start">
+      <div id="progress-bar" class="h-px bg-white/30 transition-none" style="width: 0%;"></div>
     </div>
 
     <!-- Chapter indicator -->
     <nav id="chapter-nav" class="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-end gap-4">
       <a href="#prologue" class="chapter-dot group flex items-center gap-3" data-section="prologue">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Top</span>
-        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-500">Top</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/15 transition-all duration-500"></span>
       </a>
       <a href="#about" class="chapter-dot group flex items-center gap-3" data-section="about">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">About</span>
-        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-500">About</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/15 transition-all duration-500"></span>
       </a>
       <a href="#skills" class="chapter-dot group flex items-center gap-3" data-section="skills">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Skills</span>
-        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-500">Skills</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/15 transition-all duration-500"></span>
       </a>
       <a href="#projects" class="chapter-dot group flex items-center gap-3" data-section="projects">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Works</span>
-        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-500">Works</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/15 transition-all duration-500"></span>
       </a>
       <a href="#epilogue" class="chapter-dot group flex items-center gap-3" data-section="epilogue">
-        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-300">Contact</span>
-        <span class="block w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300"></span>
+        <span class="text-[10px] tracking-[0.2em] uppercase text-white/0 group-hover:text-white/40 transition-all duration-500">Contact</span>
+        <span class="block w-1.5 h-1.5 rounded-full bg-white/15 transition-all duration-500"></span>
       </a>
     </nav>
 
@@ -76,15 +74,25 @@ const { title } = Astro.props;
 <style is:global>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  :root {
+    --color-main: #000000;
+    --color-sub: #ffffff;
+    --color-gray: #666666;
+    --easing-smooth: cubic-bezier(.07, .84, .26, 1);
+    --easing-out: cubic-bezier(.46, 0, .17, 1);
+    --duration-normal: 0.8s;
+  }
+
   html {
     scroll-behavior: auto;
     font-feature-settings: "palt" 1;
   }
 
   body {
-    background: #020202;
-    color: #fff;
+    background: var(--color-main);
+    color: var(--color-sub);
     font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -96,7 +104,7 @@ const { title } = Astro.props;
   }
 
   ::selection {
-    background: rgba(0, 240, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     color: #fff;
   }
 
@@ -105,39 +113,90 @@ const { title } = Astro.props;
   .font-heading { font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif; }
   .font-serif { font-family: 'Noto Serif Display', 'Noto Sans JP', serif; }
 
-  /* ---- Custom cursor (difference blend) ---- */
+  /* ---- Full-screen section ---- */
+  .section-fullscreen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    position: relative;
+  }
+
+  /* ---- Custom cursor (glass morphism) ---- */
   .cursor-wrap {
     position: fixed;
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
+    z-index: 100000;
   }
 
-  #cursor-bg {
-    width: 20px;
-    height: 20px;
-    background: #ffffff;
+  #cursor-inner {
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate(-50%, -50%) scale(0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s var(--easing-smooth),
+                width 0.4s var(--easing-smooth),
+                height 0.4s var(--easing-smooth);
+    overflow: hidden;
+    position: relative;
   }
 
-  .cursor-wrap.hovering #cursor-bg {
+  #cursor-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1;
+  }
+
+  #cursor-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+  }
+
+  .cursor-text {
+    position: relative;
+    z-index: 2;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--color-sub);
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+
+  .cursor-wrap.visible #cursor-inner {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .cursor-wrap.hovering #cursor-inner {
     width: 80px;
     height: 80px;
   }
 
-  /* ---- Cinematic reveals ---- */
-  .cin-reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  .cursor-wrap.hovering .cursor-text {
+    opacity: 1;
   }
-  .cin-reveal.visible {
+
+  /* ---- Cinematic reveals ---- */
+  /* JS adds .js-ready to html; without JS everything is visible */
+  html.js-ready .cin-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s var(--easing-smooth),
+                transform 1s var(--easing-smooth);
+  }
+  html.js-ready .cin-reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
@@ -146,59 +205,53 @@ const { title } = Astro.props;
   .cin-delay-3 { transition-delay: 0.45s; }
   .cin-delay-4 { transition-delay: 0.6s; }
   .cin-delay-5 { transition-delay: 0.75s; }
-  .cin-delay-6 { transition-delay: 0.9s; }
 
-  /* ---- Split text characters ---- */
-  .split-char {
+  /* ---- Split text line reveal ---- */
+  .text-split-line {
+    overflow: hidden;
+    display: block;
+    position: relative;
+  }
+  .text-split-line-inner {
+    display: block;
+    transform: translateY(100%);
+    transition: transform 0.8s var(--easing-smooth);
+  }
+  .text-split-line-inner.visible {
+    transform: translateY(0);
+  }
+
+  /* ---- Split chars ---- */
+  html.js-ready .split-char {
     display: inline-block;
     opacity: 0;
     transform: translateY(100%);
     will-change: transform, opacity;
   }
-  .split-char.visible {
+  html.js-ready .split-char.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* ---- Mask text reveal (scroll-linked) ---- */
-  .mask-reveal {
-    -webkit-mask-image: linear-gradient(to right, black 0%, black 100%);
-    mask-image: linear-gradient(to right, black 0%, black 100%);
-    -webkit-mask-size: 0% 100%;
-    mask-size: 0% 100%;
+  /* ---- Mask text reveal (horizontal wipe) ---- */
+  html.js-ready .mask-reveal {
+    --reveal: 0;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 100%);
+    mask-image: linear-gradient(to right, #000 0%, #000 100%);
+    -webkit-mask-size: calc(var(--reveal) * 100%) 100%;
+    mask-size: calc(var(--reveal) * 100%) 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
   }
 
-  /* ---- Chapter title card ---- */
-  .chapter-card {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .chapter-card.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* ---- Horizontal line reveal ---- */
-  .line-reveal {
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .line-reveal.visible {
-    transform: scaleX(1);
-  }
-
-  /* ---- Film grain (SVG turbulence + overlay blend) ---- */
+  /* ---- Film grain ---- */
   .grain-overlay {
     position: fixed;
     inset: -50%;
     width: 200%;
     height: 200%;
     filter: url(#grain-noise);
-    opacity: 0.028;
+    opacity: 0.025;
     mix-blend-mode: overlay;
     pointer-events: none;
     z-index: 9998;
@@ -218,21 +271,12 @@ const { title } = Astro.props;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .grain-overlay {
-      animation: none;
-      opacity: 0.015;
-    }
-  }
-
-  /* ---- Glow text ---- */
-  .glow-text {
-    text-shadow: 0 0 30px rgba(0, 240, 255, 0.3), 0 0 60px rgba(0, 240, 255, 0.1);
+    .grain-overlay { animation: none; opacity: 0.015; }
   }
 
   /* ---- Active chapter dot ---- */
   .chapter-dot.active span:last-child {
-    background: #00f0ff !important;
-    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+    background: var(--color-sub) !important;
     width: 0.5rem;
     height: 0.5rem;
   }
@@ -255,15 +299,45 @@ const { title } = Astro.props;
   }
 
   /* ---- Lenis ---- */
-  html.lenis, html.lenis body {
-    height: auto;
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+  /* ---- Loading state ---- */
+  html.js-ready body:not(.loaded) main { opacity: 0; }
+  body.loaded main {
+    opacity: 1;
+    transition: opacity 0.8s var(--easing-smooth) 0.1s;
   }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
+
+  /* ---- Horizontal line reveal ---- */
+  .line-h {
+    height: 0.5px;
+    background: var(--color-sub);
+    opacity: 0.08;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s var(--easing-smooth);
+  }
+  .line-h.visible {
+    transform: scaleX(1);
   }
 </style>
 
 <script>
+  // Mark JS as ready — without this, all reveal elements stay visible (CSS fallback)
+  document.documentElement.classList.add('js-ready');
+
+  // Safety net: if loaded class isn't added within 5s, force everything visible
+  setTimeout(() => {
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+      document.querySelectorAll('.cin-reveal').forEach(el => el.classList.add('visible'));
+      document.querySelectorAll('.mask-reveal').forEach(el => {
+        (el as HTMLElement).style.setProperty('--reveal', '1');
+      });
+    }
+  }, 5000);
+
   import Lenis from 'lenis';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -281,30 +355,36 @@ const { title } = Astro.props;
   gsap.ticker.add((time) => { lenis.raf(time * 1000); });
   gsap.ticker.lagSmoothing(0);
 
-  // ---- Custom cursor (mix-blend-mode: difference) ----
+  // ---- Custom cursor (glass morphism) ----
   const cursor = document.getElementById('cursor');
-  const cursorBg = document.getElementById('cursor-bg');
   let mx = 0, my = 0, cx = 0, cy = 0;
 
   document.addEventListener('mousemove', (e) => {
     mx = e.clientX;
     my = e.clientY;
+    cursor?.classList.add('visible');
   });
 
   function animateCursor() {
-    cx += (mx - cx) * 0.12;
-    cy += (my - cy) * 0.12;
-    if (cursor) {
-      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
-    }
+    cx += (mx - cx) * 0.1;
+    cy += (my - cy) * 0.1;
+    if (cursor) cursor.style.transform = `translate(${cx}px, ${cy}px)`;
     requestAnimationFrame(animateCursor);
   }
   animateCursor();
 
-  // Hover scaling
+  const cursorText = document.getElementById('cursor-text');
   document.querySelectorAll('a, button, [data-cursor-hover]').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor?.classList.add('hovering'));
-    el.addEventListener('mouseleave', () => cursor?.classList.remove('hovering'));
+    el.addEventListener('mouseenter', () => {
+      cursor?.classList.add('hovering');
+      const label = (el as HTMLElement).dataset.mouseTarget;
+      if (cursorText && label) cursorText.textContent = label;
+      else if (cursorText) cursorText.textContent = '+';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor?.classList.remove('hovering');
+      if (cursorText) cursorText.textContent = '';
+    });
   });
 
   // ---- Progress bar ----
@@ -336,17 +416,30 @@ const { title } = Astro.props;
   // ---- Cinematic reveal observer ----
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
-  document.querySelectorAll('.cin-reveal, .chapter-card, .line-reveal').forEach(el => {
-    revealObserver.observe(el);
-  });
+  function observeReveals() {
+    document.querySelectorAll('.cin-reveal, .line-h, .text-split-line-inner').forEach(el => {
+      revealObserver.observe(el);
+    });
+  }
+  observeReveals();
 
-  // ---- Split text (GSAP powered) ----
+  // Re-observe after loading completes to catch elements already in viewport
+  const loadedCheck = setInterval(() => {
+    if (document.body.classList.contains('loaded')) {
+      clearInterval(loadedCheck);
+      // Force re-evaluation by unobserving and re-observing
+      document.querySelectorAll('.cin-reveal, .line-h, .text-split-line-inner').forEach(el => {
+        revealObserver.unobserve(el);
+        revealObserver.observe(el);
+      });
+    }
+  }, 100);
+
+  // ---- Split text (GSAP) ----
   document.querySelectorAll('[data-split]').forEach(el => {
     const text = el.textContent ?? '';
     el.innerHTML = '';
@@ -373,26 +466,50 @@ const { title } = Astro.props;
     });
   });
 
-  // ---- Mask reveal (scroll-linked) ----
+  // ---- Mask reveal ----
   document.querySelectorAll('.mask-reveal').forEach(el => {
-    gsap.to(el, {
-      maskSize: '100% 100%',
-      webkitMaskSize: '100% 100%',
-      ease: 'none',
+    const rect = el.getBoundingClientRect();
+    const isAboveFold = rect.top < window.innerHeight;
+
+    if (isAboveFold) {
+      // Already in viewport — reveal immediately without scrub
+      (el as HTMLElement).style.setProperty('--reveal', '1');
+    } else {
+      gsap.to(el as HTMLElement, {
+        '--reveal': 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          end: 'top 40%',
+          scrub: 0.8,
+        },
+      });
+    }
+  });
+
+  // ---- Stagger reveal for grid items ----
+  document.querySelectorAll('[data-stagger-parent]').forEach(parent => {
+    const children = parent.querySelectorAll('[data-stagger-child]');
+    gsap.from(children, {
+      y: 60,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.06,
+      ease: 'power3.out',
       scrollTrigger: {
-        trigger: el,
+        trigger: parent,
         start: 'top 80%',
-        end: 'top 30%',
-        scrub: 1,
+        toggleActions: 'play none none none',
       },
     });
   });
 
-  // ---- Parallax elements ----
-  document.querySelectorAll('[data-parallax]').forEach(el => {
-    const speed = parseFloat((el as HTMLElement).dataset.parallax ?? '0.2');
-    gsap.to(el, {
-      y: () => -ScrollTrigger.maxScroll(window) * speed,
+  // ---- SVG circles parallax ----
+  document.querySelectorAll('.svg-circles svg').forEach((svg, i) => {
+    gsap.to(svg, {
+      y: () => (i % 2 === 0 ? -80 : 80),
+      rotation: i * 15,
       ease: 'none',
       scrollTrigger: {
         start: 0,

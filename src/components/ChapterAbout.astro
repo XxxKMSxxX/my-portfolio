@@ -1,96 +1,65 @@
 ---
 ---
 
-<section id="about" class="relative min-h-screen py-40 px-6">
-  <!-- Chapter title card -->
-  <div class="max-w-6xl mx-auto mb-20">
-    <div class="chapter-card flex items-center gap-6 mb-16">
-      <span class="font-heading text-7xl md:text-9xl font-bold text-white/[0.03]">01</span>
-      <div>
-        <div class="line-reveal w-12 h-px bg-[#00f0ff] mb-3"></div>
-        <span class="text-[10px] tracking-[0.4em] uppercase text-[#00f0ff]">Identity</span>
-      </div>
+<section id="about" class="section-fullscreen relative flex items-center overflow-hidden">
+  <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-[7%]">
+    <!-- Section number -->
+    <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
+      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">01</span>
+      <div class="w-8 h-px bg-white/10"></div>
+      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">About</span>
     </div>
 
-    <!-- Profile photo + heading -->
-    <div class="cin-reveal flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
-      <div class="relative flex-shrink-0">
-        <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-white/10 shadow-[0_0_40px_rgba(0,240,255,0.08)]">
-          <picture>
-            <source srcset="/images/profile.avif" type="image/avif" />
-            <img
-              src="/images/profile.jpg"
-              alt="Kimura Shun"
-              width="144"
-              height="144"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </picture>
-        </div>
-        <div class="absolute inset-0 rounded-full border border-[#00f0ff]/20 scale-110"></div>
-      </div>
-      <div class="text-center md:text-left">
-        <h2 class="font-heading text-3xl md:text-5xl font-bold leading-tight mb-3">
-          コードで描く、<br />
-          <span class="font-serif italic bg-gradient-to-r from-[#00f0ff] to-[#8b5cf6] bg-clip-text" style="color: transparent; -webkit-background-clip: text;">
-            未来の設計図
-          </span>
-        </h2>
-        <p class="text-sm text-white/25 tracking-wider">Full-Stack Engineer &times; AI Architect</p>
-      </div>
+    <!-- Main text with mask reveal -->
+    <div class="space-y-1 mb-12 md:mb-16">
+      <p class="mask-reveal text-lg md:text-2xl lg:text-3xl leading-[1.6] font-light">
+        SIer・コンサルティングファームを経て、
+      </p>
+      <p class="mask-reveal text-lg md:text-2xl lg:text-3xl leading-[1.6] font-light">
+        大規模プラットフォームの設計・構築・運用に
+      </p>
+      <p class="mask-reveal text-lg md:text-2xl lg:text-3xl leading-[1.6] font-light">
+        一貫して携わってきました。
+      </p>
     </div>
 
-    <div class="grid md:grid-cols-5 gap-12 md:gap-16">
-      <!-- Left column -->
-      <div class="md:col-span-3">
-        <div class="space-y-6 text-white/45 leading-relaxed">
-          <p class="mask-reveal text-lg">
-            SIer・コンサルティングファームを経て、大規模プラットフォームの設計・構築・運用に一貫して携わってきました。
-          </p>
-          <p class="mask-reveal text-lg">
-            現在はスタートアップのCTOとして、AIエージェント基盤やSaaS製品のアーキテクチャ設計から実装・運用まで、プロダクト開発を一気通貫で手がけています。
-          </p>
-          <p class="mask-reveal text-lg">
-            業務の傍ら、個人開発でもブロックチェーン上のトレーディングBot、不動産リスク分析AI、ペットケアPWAなど——技術の限界を探る挑戦を続けています。
-          </p>
-        </div>
+    <div class="grid md:grid-cols-2 gap-8 md:gap-16">
+      <!-- Left: description -->
+      <div class="space-y-5">
+        <p class="mask-reveal text-sm leading-[1.8] text-white/40 font-light">
+          現在はスタートアップのCTOとして、AIエージェント基盤やSaaS製品のアーキテクチャ設計から実装・運用まで、プロダクト開発を一気通貫で手がけています。
+        </p>
+        <p class="mask-reveal text-sm leading-[1.8] text-white/40 font-light">
+          業務の傍ら、個人開発でもブロックチェーン上のトレーディングBot、不動産リスク分析AI、ペットケアPWAなど——技術の限界を探る挑戦を続けています。
+        </p>
       </div>
 
-      <!-- Right column: stats -->
-      <div class="md:col-span-2 flex flex-col justify-center">
-        <div class="space-y-8">
-          <div class="cin-reveal cin-delay-2 group">
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="font-serif italic text-5xl font-bold text-[#00f0ff]">15+</span>
-              <span class="text-xs text-white/30 uppercase tracking-wider">Projects</span>
-            </div>
-            <div class="w-full h-px bg-white/5 group-hover:bg-[#00f0ff]/20 transition-colors duration-500"></div>
+      <!-- Right: profile -->
+      <div class="cin-reveal cin-delay-1">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10 relative">
+            <!-- Animated ring -->
+            <div class="absolute inset-[-2px] rounded-full border border-white/[0.06] animate-spin" style="animation-duration: 12s;"></div>
+            <picture>
+              <source srcset="/images/profile.avif" type="image/avif" />
+              <img src="/images/profile.jpg" alt="Kimura Shun" width="48" height="48" class="w-full h-full object-cover" loading="lazy" />
+            </picture>
           </div>
-
-          <div class="cin-reveal cin-delay-3 group">
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="font-serif italic text-5xl font-bold text-[#8b5cf6]">7+</span>
-              <span class="text-xs text-white/30 uppercase tracking-wider">Products Shipped</span>
-            </div>
-            <div class="w-full h-px bg-white/5 group-hover:bg-[#8b5cf6]/20 transition-colors duration-500"></div>
-          </div>
-
-          <div class="cin-reveal cin-delay-4 group">
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="font-serif italic text-5xl font-bold text-[#f472b6]">5+</span>
-              <span class="text-xs text-white/30 uppercase tracking-wider">Awards</span>
-            </div>
-            <div class="w-full h-px bg-white/5 group-hover:bg-[#f472b6]/20 transition-colors duration-500"></div>
+          <div>
+            <p class="font-heading text-sm font-medium">Kimura Shun</p>
+            <p class="text-[10px] text-white/25 tracking-[0.1em] mt-0.5">CTO / Full-Stack Engineer</p>
           </div>
         </div>
-
-        <div class="cin-reveal cin-delay-5 mt-12 flex flex-wrap gap-2">
-          {['TypeScript', 'Rust', 'Python', 'React', 'Next.js', 'Three.js', 'Solana', 'AWS', 'K8s', 'Terraform'].map(tag => (
-            <span class="text-[10px] tracking-wider uppercase text-white/25 border border-white/5 px-2.5 py-1 rounded-full hover:text-[#00f0ff]/60 hover:border-[#00f0ff]/20 transition-all duration-300">
-              {tag}
-            </span>
-          ))}
+        <!-- Stats with animated count-up feel -->
+        <div class="flex gap-10">
+          <div class="stat-block group">
+            <p class="font-heading text-2xl md:text-3xl font-light transition-colors duration-500 group-hover:text-[#00f0ff]/60">15+</p>
+            <p class="text-[10px] tracking-[0.15em] text-white/25 uppercase mt-1">Projects</p>
+          </div>
+          <div class="stat-block group">
+            <p class="font-heading text-2xl md:text-3xl font-light transition-colors duration-500 group-hover:text-[#8b5cf6]/60">7+</p>
+            <p class="text-[10px] tracking-[0.15em] text-white/25 uppercase mt-1">Products</p>
+          </div>
         </div>
       </div>
     </div>

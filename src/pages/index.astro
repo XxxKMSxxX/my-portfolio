@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Loading from '../components/Loading.astro';
 import CinematicScene from '../components/CinematicScene.astro';
 import Prologue from '../components/Prologue.astro';
 import ChapterAbout from '../components/ChapterAbout.astro';
@@ -10,6 +11,7 @@ import Epilogue from '../components/Epilogue.astro';
 ---
 
 <Layout title="Kimura Shun | Full-Stack Engineer × AI Architect">
+  <Loading />
   <CinematicScene />
 
   <main class="relative z-10">

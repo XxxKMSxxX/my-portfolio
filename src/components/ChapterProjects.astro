@@ -5,9 +5,8 @@ const projects = [
     title: 'Demand Forecast AI Agent',
     subtitle: '需要予測AIエージェントプラットフォーム',
     description: '対話型インターフェースで市場データと予測モデルを統合し、サプライチェーンの意思決定を加速するAIエージェント基盤。',
-    tags: ['Next.js', 'FastAPI', 'AWS EKS', 'SageMaker', 'Terraform', 'ArgoCD'],
-    color: '#8b5cf6',
-    gradient: 'from-[#1a0a2e] to-[#0a1628]',
+    tags: ['Next.js', 'FastAPI', 'AWS EKS', 'SageMaker', 'Terraform'],
+    accent: '#00f0ff',
   },
   {
     id: 'trade-ai',
@@ -15,217 +14,121 @@ const projects = [
     subtitle: '国際貿易AIプラットフォーム',
     description: 'HSコード分類、関税計算、FTA活用判断、規制チェックをAIが一括処理。国際貿易の複雑な意思決定を秒速に。',
     tags: ['Next.js', 'Turso', 'Claude AI', 'Drizzle ORM'],
-    color: '#00f0ff',
-    gradient: 'from-[#0a1628] to-[#0a1e1e]',
+    accent: '#8b5cf6',
   },
   {
     id: 'arbitrage',
     title: 'DEX Arbitrage Bot',
     subtitle: 'アトミックアービトラージBot',
-    description: '13のDEXを横断するブロックチェーン上のアービトラージBot。Rust × Anchorで構築、Flash Loan・MEV統合による高速実行。',
-    tags: ['Rust', 'Anchor', 'Solana', 'gRPC', 'Prometheus'],
-    color: '#f472b6',
-    gradient: 'from-[#2a0a1e] to-[#1a0a2e]',
+    description: '13のDEXを横断するブロックチェーン上のアービトラージBot。Rust × Anchorで構築、Flash Loan・MEV統合。',
+    tags: ['Rust', 'Anchor', 'Solana', 'gRPC'],
+    accent: '#f472b6',
   },
   {
     id: 'pet-app',
     title: 'Pet Care PWA',
     subtitle: 'ペットケア記録アプリ',
     description: '投薬・通院・健康記録を家族で共有するPWA。AIによる健康レポート自動生成、プッシュ通知でリマインド。',
-    tags: ['Next.js', 'Turso', 'Claude AI', 'PWA', 'Web Push'],
-    color: '#00f0ff',
-    gradient: 'from-[#0a1e1e] to-[#0a1628]',
+    tags: ['Next.js', 'Turso', 'Claude AI', 'PWA'],
+    accent: '#34d399',
   },
   {
     id: 'realestate',
     title: 'Real Estate Risk Analyzer',
     subtitle: '不動産リスク分析AI',
-    description: '政府オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。MCP Serverも構築。',
+    description: '政府オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。',
     tags: ['Python', 'ML', 'Gov API', 'MCP Server'],
-    color: '#8b5cf6',
-    gradient: 'from-[#1a0a2e] to-[#2a0a1e]',
+    accent: '#fbbf24',
   },
   {
     id: 'agent-platform',
     title: 'AI Agent Runtime',
     subtitle: '自律実行AIエージェント基盤',
     description: 'Rust × axum × WASMで構築した自律AIエージェント実行基盤。マルチクレート構成で拡張性と安全性を両立。',
-    tags: ['Rust', 'axum', 'WASM', 'PostgreSQL', 'pgvector'],
-    color: '#f472b6',
-    gradient: 'from-[#2a0a1e] to-[#0a1628]',
+    tags: ['Rust', 'axum', 'WASM', 'PostgreSQL'],
+    accent: '#f97316',
   },
 ];
 ---
 
-<section id="projects" class="relative py-40 px-6">
-  <!-- Chapter title card -->
-  <div class="max-w-6xl mx-auto mb-20">
-    <div class="chapter-card flex items-center gap-6 mb-16">
-      <span class="font-heading text-7xl md:text-9xl font-bold text-white/[0.03]">03</span>
-      <div>
-        <div class="line-reveal w-12 h-px bg-[#f472b6] mb-3"></div>
-        <span class="text-[10px] tracking-[0.4em] uppercase text-[#f472b6]">Works</span>
-      </div>
+<section id="projects" class="relative py-32 md:py-40">
+  <div class="max-w-5xl mx-auto px-6 md:px-12">
+    <!-- Section number -->
+    <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
+      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">03</span>
+      <div class="w-8 h-px bg-white/10"></div>
+      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Projects</span>
     </div>
 
-    <h2 class="cin-reveal font-heading text-3xl md:text-5xl font-bold mb-6">
-      Selected Projects
-    </h2>
-    <p class="cin-reveal cin-delay-1 text-white/35 max-w-xl mb-20">
-      業務から個人開発まで、技術の可能性に挑み続けるプロジェクト群。
-    </p>
-  </div>
+    <!-- Title -->
+    <div class="cin-reveal mb-16 md:mb-24">
+      <h2 class="mask-reveal text-[6vw] md:text-[3.5vw] lg:text-[2.8vw] leading-[1.4] tracking-[0.01em] font-light">
+        つくってきた<span class="font-serif italic">もの</span>たち
+      </h2>
+    </div>
 
-  <!-- Project list -->
-  <div class="max-w-6xl mx-auto space-y-32">
-    {projects.map((project, idx) => (
-      <article class="cin-reveal group">
-        <div class={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${idx % 2 === 1 ? 'direction-rtl' : ''}`}>
-          {/* Visual */}
-          <div class={`${idx % 2 === 1 ? 'md:order-2' : ''}`}>
-            <div class={`relative aspect-[16/10] rounded-xl overflow-hidden border border-white/5 bg-gradient-to-br ${project.gradient}`}>
-              <canvas class="project-3d-canvas w-full h-full" data-color={project.color} data-idx={idx}></canvas>
-              <div class="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent"></div>
+    <!-- Project list -->
+    <div class="space-y-0">
+      {projects.map((project, idx) => (
+        <article class="project-item group" data-cursor-hover data-mouse-target={project.title} data-accent={project.accent}>
+          <div class="line-h w-full"></div>
+          <div class="py-8 md:py-12 cin-reveal relative">
+            <!-- Hover accent glow (background) -->
+            <div
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+              style={`background: linear-gradient(90deg, ${project.accent}05 0%, transparent 60%);`}
+            ></div>
+
+            <div class="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-12">
+              <!-- Left: number + title -->
+              <div class="flex-1">
+                <div class="flex items-center gap-3">
+                  <span class="project-num font-heading text-3xl md:text-4xl font-extralight tabular-nums transition-colors duration-500" style={`color: rgba(255,255,255,0.08);`} data-hover-color={project.accent}>
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <div class="w-4 h-px bg-white/10 group-hover:w-8 transition-all duration-500"></div>
+                </div>
+                <h3 class="font-heading text-xl md:text-2xl lg:text-3xl font-medium mt-3 leading-tight group-hover:text-white transition-colors duration-500">
+                  {project.title}
+                </h3>
+                <p class="text-xs text-white/25 mt-1 tracking-wide group-hover:text-white/40 transition-colors duration-500">{project.subtitle}</p>
+              </div>
+
+              <!-- Right: description + tags -->
+              <div class="md:max-w-sm md:text-right">
+                <p class="text-sm text-white/30 leading-relaxed font-light group-hover:text-white/50 transition-colors duration-500">
+                  {project.description}
+                </p>
+                <div class="flex flex-wrap md:justify-end gap-2 mt-4">
+                  {project.tags.map(tag => (
+                    <span
+                      class="text-[10px] tracking-[0.1em] text-white/15 uppercase px-2 py-0.5 border border-white/[0.04] rounded-sm group-hover:border-white/[0.08] group-hover:text-white/30 transition-all duration-500"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Info */}
-          <div class={`${idx % 2 === 1 ? 'md:order-1 md:text-right' : ''}`}>
-            <span class="text-xs font-mono text-white/15 tracking-wider">0{idx + 1}</span>
-            <h3 class="font-heading text-2xl md:text-4xl font-bold mt-2 mb-1 group-hover:text-white transition-colors duration-300" style={`color: ${project.color};`}>
-              {project.title}
-            </h3>
-            <p class="text-sm text-white/40 mb-4">{project.subtitle}</p>
-            <p class="text-white/35 text-sm leading-relaxed mb-6">
-              {project.description}
-            </p>
-            <div class={`flex flex-wrap gap-2 ${idx % 2 === 1 ? 'md:justify-end' : ''}`}>
-              {project.tags.map(tag => (
-                <span
-                  class="text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full border"
-                  style={`color: ${project.color}80; border-color: ${project.color}15;`}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </article>
-    ))}
+        </article>
+      ))}
+      <div class="line-h w-full"></div>
+    </div>
   </div>
 </section>
 
 <script>
-  import * as THREE from 'three';
+  document.querySelectorAll('.project-item').forEach(item => {
+    const num = item.querySelector('.project-num') as HTMLElement;
+    const accent = (item as HTMLElement).dataset.accent;
+    if (!num || !accent) return;
 
-  function initProjectScenes() {
-    const canvases = document.querySelectorAll<HTMLCanvasElement>('.project-3d-canvas');
-
-    canvases.forEach((canvas) => {
-      const color = canvas.dataset.color ?? '#00f0ff';
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width === 0) return;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(rect.width, rect.height);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, rect.width / rect.height, 0.1, 100);
-      camera.position.z = 6;
-
-      const group = new THREE.Group();
-      scene.add(group);
-
-      const shapes = [
-        new THREE.IcosahedronGeometry(0.5, 0),
-        new THREE.OctahedronGeometry(0.4, 0),
-        new THREE.TetrahedronGeometry(0.35, 0),
-        new THREE.TorusGeometry(0.3, 0.1, 6, 12),
-      ];
-
-      for (let i = 0; i < 8; i++) {
-        const geo = shapes[i % shapes.length];
-        const edges = new THREE.EdgesGeometry(geo);
-        const mat = new THREE.LineBasicMaterial({
-          color,
-          transparent: true,
-          opacity: 0.15 + Math.random() * 0.2,
-        });
-        const line = new THREE.LineSegments(edges, mat);
-        line.position.set(
-          (Math.random() - 0.5) * 7,
-          (Math.random() - 0.5) * 5,
-          (Math.random() - 0.5) * 4,
-        );
-        line.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-        const s = 0.6 + Math.random() * 1.8;
-        line.scale.setScalar(s);
-        group.add(line);
-      }
-
-      const pCount = 100;
-      const pGeo = new THREE.BufferGeometry();
-      const pPos = new Float32Array(pCount * 3);
-      for (let i = 0; i < pCount; i++) {
-        pPos[i * 3] = (Math.random() - 0.5) * 10;
-        pPos[i * 3 + 1] = (Math.random() - 0.5) * 8;
-        pPos[i * 3 + 2] = (Math.random() - 0.5) * 6;
-      }
-      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-      const pMat = new THREE.PointsMaterial({
-        color,
-        size: 0.03,
-        transparent: true,
-        opacity: 0.4,
-        blending: THREE.AdditiveBlending,
-      });
-      group.add(new THREE.Points(pGeo, pMat));
-
-      let time = 0;
-      let running = false;
-
-      function animate() {
-        if (!running) return;
-        requestAnimationFrame(animate);
-        time += 0.016;
-
-        group.rotation.y = time * 0.08;
-        group.rotation.x = Math.sin(time * 0.15) * 0.08;
-
-        group.children.forEach((child, i) => {
-          if (child instanceof THREE.LineSegments) {
-            child.rotation.x += 0.002;
-            child.rotation.y += 0.003;
-            child.position.y += Math.sin(time + i) * 0.0008;
-          }
-        });
-
-        renderer.render(scene, camera);
-      }
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          running = entry.isIntersecting;
-          if (running) animate();
-        });
-      }, { threshold: 0.05 });
-      observer.observe(canvas);
-
-      const resizeObs = new ResizeObserver(entries => {
-        for (const entry of entries) {
-          const { width, height } = entry.contentRect;
-          if (width > 0 && height > 0) {
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-          }
-        }
-      });
-      resizeObs.observe(canvas);
+    item.addEventListener('mouseenter', () => {
+      num.style.color = accent + '60';
     });
-  }
-
-  initProjectScenes();
+    item.addEventListener('mouseleave', () => {
+      num.style.color = 'rgba(255,255,255,0.08)';
+    });
+  });
 </script>

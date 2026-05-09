@@ -7,25 +7,29 @@ interface Skill {
 
 interface SkillCategory {
   title: string;
-  color: string;
+  accent: string;
+  description: string;
   items: Skill[];
 }
 
 const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
-    color: '#00f0ff',
+    accent: '#00f0ff',
+    description: '型安全なTS/Rustを軸に、用途に応じて言語を使い分ける',
     items: [
       { name: 'TypeScript', url: 'https://www.typescriptlang.org/', icon: 'i-simple-icons-typescript' },
       { name: 'Rust', url: 'https://www.rust-lang.org/', icon: 'i-simple-icons-rust' },
       { name: 'Python', url: 'https://www.python.org/', icon: 'i-simple-icons-python' },
+      { name: 'Go', url: 'https://go.dev/', icon: 'i-simple-icons-go' },
       { name: 'SQL', url: 'https://ja.wikipedia.org/wiki/SQL' },
       { name: 'GLSL', url: 'https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language', icon: 'i-simple-icons-opengl' },
     ],
   },
   {
     title: 'Frontend',
-    color: '#8b5cf6',
+    accent: '#8b5cf6',
+    description: 'SSR/SSG/SPAを使い分け、パフォーマンスとUXを両立',
     items: [
       { name: 'React', url: 'https://react.dev/', icon: 'i-simple-icons-react' },
       { name: 'Next.js', url: 'https://nextjs.org/', icon: 'i-simple-icons-nextdotjs' },
@@ -33,36 +37,45 @@ const skillCategories: SkillCategory[] = [
       { name: 'Vue.js', url: 'https://vuejs.org/', icon: 'i-simple-icons-vuedotjs' },
       { name: 'Tailwind CSS', url: 'https://tailwindcss.com/', icon: 'i-simple-icons-tailwindcss' },
       { name: 'Three.js', url: 'https://threejs.org/', icon: 'i-simple-icons-threedotjs' },
+      { name: 'GSAP', url: 'https://gsap.com/', icon: 'i-simple-icons-greensock' },
       { name: 'Framer Motion', url: 'https://www.framer.com/motion/', icon: 'i-simple-icons-framer' },
     ],
   },
   {
     title: 'Backend',
-    color: '#f472b6',
+    accent: '#f472b6',
+    description: 'リアルタイム通信からマイクロサービスまで、用途に最適なスタックを選定',
     items: [
       { name: 'Node.js', url: 'https://nodejs.org/', icon: 'i-simple-icons-nodedotjs' },
+      { name: 'Hono', url: 'https://hono.dev/', icon: 'i-simple-icons-hono' },
       { name: 'FastAPI', url: 'https://fastapi.tiangolo.com/', icon: 'i-simple-icons-fastapi' },
       { name: 'axum', url: 'https://github.com/tokio-rs/axum' },
       { name: 'GraphQL', url: 'https://graphql.org/', icon: 'i-simple-icons-graphql' },
+      { name: 'tRPC', url: 'https://trpc.io/' },
       { name: 'gRPC', url: 'https://grpc.io/' },
       { name: 'WebSocket', url: 'https://developer.mozilla.org/docs/Web/API/WebSockets_API' },
     ],
   },
   {
     title: 'AI / ML',
-    color: '#00f0ff',
+    accent: '#34d399',
+    description: 'RAG・エージェント・予測モデルの設計から本番運用まで一貫して構築',
     items: [
       { name: 'AWS Bedrock', url: 'https://aws.amazon.com/bedrock/', icon: 'i-simple-icons-amazonaws' },
+      { name: 'Claude API', url: 'https://docs.anthropic.com/', icon: 'i-simple-icons-anthropic' },
       { name: 'LangChain', url: 'https://www.langchain.com/', icon: 'i-simple-icons-langchain' },
+      { name: 'LangGraph', url: 'https://www.langchain.com/langgraph' },
       { name: 'SageMaker', url: 'https://aws.amazon.com/sagemaker/', icon: 'i-simple-icons-amazonaws' },
       { name: 'pgvector', url: 'https://github.com/pgvector/pgvector' },
       { name: 'LSTM / Attention', url: 'https://pytorch.org/', icon: 'i-simple-icons-pytorch' },
       { name: 'MCP Server', url: 'https://modelcontextprotocol.io/', icon: 'i-simple-icons-anthropic' },
+      { name: 'Vercel AI SDK', url: 'https://sdk.vercel.ai/', icon: 'i-simple-icons-vercel' },
     ],
   },
   {
     title: 'Database',
-    color: '#8b5cf6',
+    accent: '#fbbf24',
+    description: 'OLTP/OLAP/時系列/ベクトルDBを要件に応じて使い分け',
     items: [
       { name: 'PostgreSQL', url: 'https://www.postgresql.org/', icon: 'i-simple-icons-postgresql' },
       { name: 'Turso', url: 'https://turso.tech/', icon: 'i-simple-icons-turso' },
@@ -75,30 +88,36 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: 'Infrastructure',
-    color: '#f472b6',
+    accent: '#f97316',
+    description: 'IaCでマルチAZ構成を構築し、GitOpsで自動デプロイ',
     items: [
       { name: 'AWS', url: 'https://aws.amazon.com/', icon: 'i-simple-icons-amazonaws' },
+      { name: 'Vercel', url: 'https://vercel.com/', icon: 'i-simple-icons-vercel' },
       { name: 'Terraform', url: 'https://www.terraform.io/', icon: 'i-simple-icons-terraform' },
       { name: 'Kubernetes', url: 'https://kubernetes.io/', icon: 'i-simple-icons-kubernetes' },
       { name: 'ArgoCD', url: 'https://argoproj.github.io/cd/', icon: 'i-simple-icons-argo' },
       { name: 'Docker', url: 'https://www.docker.com/', icon: 'i-simple-icons-docker' },
       { name: 'GitHub Actions', url: 'https://github.com/features/actions', icon: 'i-simple-icons-githubactions' },
+      { name: 'Datadog', url: 'https://www.datadoghq.com/', icon: 'i-simple-icons-datadog' },
     ],
   },
   {
-    title: 'Data Pipeline',
-    color: '#00f0ff',
+    title: 'Data Engineering',
+    accent: '#06b6d4',
+    description: 'ELT/Medallionアーキテクチャで分析基盤を設計・運用',
     items: [
       { name: 'Meltano', url: 'https://meltano.com/', icon: 'i-simple-icons-meltano' },
       { name: 'dbt', url: 'https://www.getdbt.com/', icon: 'i-simple-icons-dbt' },
       { name: 'Apache Airflow', url: 'https://airflow.apache.org/', icon: 'i-simple-icons-apacheairflow' },
       { name: 'Great Expectations', url: 'https://greatexpectations.io/' },
       { name: 'Medallion Arch.', url: 'https://www.databricks.com/glossary/medallion-architecture', icon: 'i-simple-icons-databricks' },
+      { name: 'Apache Kafka', url: 'https://kafka.apache.org/', icon: 'i-simple-icons-apachekafka' },
     ],
   },
   {
     title: 'Blockchain',
-    color: '#8b5cf6',
+    accent: '#a78bfa',
+    description: 'DeFi・MEV・オンチェーン分析の実践的な開発経験',
     items: [
       { name: 'Solana', url: 'https://solana.com/', icon: 'i-simple-icons-solana' },
       { name: 'Anchor', url: 'https://www.anchor-lang.com/' },
@@ -108,70 +127,124 @@ const skillCategories: SkillCategory[] = [
     ],
   },
 ];
+
+const totalSkills = skillCategories.reduce((sum, cat) => sum + cat.items.length, 0);
 ---
 
-<section id="skills" class="relative min-h-screen py-40 px-6">
-  <!-- Chapter title card -->
-  <div class="max-w-6xl mx-auto mb-20">
-    <div class="chapter-card flex items-center gap-6 mb-16">
-      <span class="font-heading text-7xl md:text-9xl font-bold text-white/[0.03]">02</span>
-      <div>
-        <div class="line-reveal w-12 h-px bg-[#8b5cf6] mb-3"></div>
-        <span class="text-[10px] tracking-[0.4em] uppercase text-[#8b5cf6]">Arsenal</span>
+<section id="skills" class="relative py-32 md:py-40 overflow-hidden">
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
+    <!-- Section number -->
+    <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
+      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">02</span>
+      <div class="w-8 h-px bg-white/10"></div>
+      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Skills</span>
+    </div>
+
+    <!-- Title + lead -->
+    <div class="cin-reveal mb-6 md:mb-8">
+      <h2 class="mask-reveal text-[6vw] md:text-[3.5vw] lg:text-[2.8vw] leading-[1.4] tracking-[0.01em] font-light">
+        技術を横断し、<span class="font-serif italic">統合</span>する
+      </h2>
+    </div>
+    <div class="cin-reveal cin-delay-1 mb-14 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <p class="mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-lg">
+        フロントエンドからインフラ、AI、ブロックチェーンまで——<br class="hidden md:inline" />
+        8領域・{totalSkills}+の技術スタックを横断的に扱い、プロダクトを丸ごと設計・構築します。
+      </p>
+      <div class="flex gap-8">
+        <div class="group">
+          <p class="font-heading text-2xl font-light transition-colors duration-500 group-hover:text-[#00f0ff]/60">{skillCategories.length}</p>
+          <p class="text-[10px] tracking-[0.15em] text-white/20 uppercase mt-0.5">Domains</p>
+        </div>
+        <div class="group">
+          <p class="font-heading text-2xl font-light transition-colors duration-500 group-hover:text-[#8b5cf6]/60">{totalSkills}+</p>
+          <p class="text-[10px] tracking-[0.15em] text-white/20 uppercase mt-0.5">Technologies</p>
+        </div>
       </div>
     </div>
 
-    <h2 class="cin-reveal font-heading text-3xl md:text-5xl font-bold mb-6">
-      Tech Stack
-    </h2>
-    <p class="cin-reveal cin-delay-1 text-white/35 max-w-xl mb-20">
-      フロントエンドからインフラ、AI、ブロックチェーンまで。<br />
-      プロダクトに必要な技術を横断的に扱います。
-    </p>
-  </div>
-
-  <!-- Skills grid -->
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-    {skillCategories.map((cat, idx) => (
-      <div class={`cin-reveal cin-delay-${Math.min(idx + 1, 6)}`}>
-        <div class="group relative p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-500 h-full">
-          <!-- Hover glow -->
-          <div
-            class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            style={`background: radial-gradient(circle at 50% 0%, ${cat.color}08, transparent 70%);`}
-          ></div>
-
-          <div class="relative">
-            <div class="flex items-center gap-2 mb-5">
-              <div class="w-1.5 h-1.5 rounded-full" style={`background: ${cat.color};`}></div>
-              <h3 class="text-xs tracking-[0.2em] uppercase font-medium" style={`color: ${cat.color};`}>
-                {cat.title}
-              </h3>
+    <!-- Skills grid with accent colors -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" data-stagger-parent>
+      {skillCategories.map((cat) => (
+        <div class="skill-card" data-stagger-child data-accent={cat.accent}>
+          <div class="skill-card-inner">
+            <!-- Category header with accent bar -->
+            <div class="mb-4 pb-3 border-b border-white/[0.06]">
+              <div class="flex items-center gap-2.5 mb-2">
+                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" style={`background: ${cat.accent};`}></div>
+                <h3 class="text-xs tracking-[0.15em] uppercase font-medium text-white/60">
+                  {cat.title}
+                </h3>
+              </div>
+              <p class="text-[11px] text-white/20 font-light leading-relaxed pl-4">
+                {cat.description}
+              </p>
             </div>
-            <ul class="space-y-1.5">
+            <ul class="space-y-1">
               {cat.items.map(item => (
                 <li>
                   <a
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="skill-link flex items-center gap-2.5 py-1.5 px-2 -mx-2 rounded-md text-sm text-white/40 hover:text-white/80 hover:bg-white/[0.03] transition-all duration-300"
+                    data-mouse-target={item.name}
+                    class="skill-link flex items-center gap-2 py-1 text-[13px] text-white/30 hover:text-white/90 transition-all duration-400 font-light group/link"
                   >
-                    {item.icon ? (
-                      <span class={`${item.icon} text-base flex-shrink-0 opacity-40 group-hover:opacity-60`} style={`color: ${cat.color};`}></span>
-                    ) : (
-                      <span class="w-4 h-4 flex items-center justify-center flex-shrink-0">
-                        <span class="block w-1 h-1 rounded-full opacity-30" style={`background: ${cat.color};`}></span>
+                    {item.icon && (
+                      <span class={`${item.icon} text-[13px] flex-shrink-0 opacity-20 group-hover/link:opacity-60 transition-opacity duration-400`}></span>
+                    )}
+                    {!item.icon && (
+                      <span class="w-[13px] h-[13px] flex-shrink-0 flex items-center justify-center opacity-20 group-hover/link:opacity-60 transition-opacity duration-400">
+                        <span class="w-1 h-1 rounded-full bg-current"></span>
                       </span>
                     )}
-                    <span>{item.name}</span>
+                    <span class="relative">
+                      {item.name}
+                      <span class="absolute left-0 bottom-0 w-0 h-px group-hover/link:w-full transition-all duration-400" style={`background: ${cat.accent}40;`}></span>
+                    </span>
+                    <svg width="7" height="7" viewBox="0 0 10 10" fill="none" class="ml-auto opacity-0 group-hover/link:opacity-30 transition-all duration-400 flex-shrink-0 stroke-current translate-x-[-4px] group-hover/link:translate-x-0">
+                      <path d="M1 1H9M9 1V9M9 1L1 9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                    </svg>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .skill-card {
+    position: relative;
+    padding: 1px;
+    border-radius: 8px;
+    background: transparent;
+    transition: background 0.6s ease;
+  }
+
+  .skill-card:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.06) 0%,
+      rgba(255,255,255,0.02) 50%,
+      rgba(255,255,255,0.04) 100%
+    );
+  }
+
+  .skill-card-inner {
+    padding: 16px;
+    border-radius: 7px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    height: 100%;
+    transition: background 0.6s ease;
+  }
+
+  .skill-card:hover .skill-card-inner {
+    background: rgba(0,0,0,0.5);
+  }
+</style>

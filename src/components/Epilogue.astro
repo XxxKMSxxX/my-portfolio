@@ -1,103 +1,84 @@
 ---
 ---
 
-<section id="epilogue" class="relative min-h-screen flex items-center justify-center py-40 px-6">
-  <div class="max-w-4xl mx-auto text-center">
-    <!-- Chapter card -->
-    <div class="chapter-card mb-16">
-      <span class="font-serif italic text-7xl md:text-9xl font-bold text-white/[0.03]">Fin</span>
+<section id="epilogue" class="section-fullscreen relative flex items-center overflow-hidden">
+  <div class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12">
+    <!-- Section number -->
+    <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
+      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">04</span>
+      <div class="w-8 h-px bg-white/10"></div>
+      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Contact</span>
     </div>
 
-    <h2 class="cin-reveal font-heading text-4xl md:text-7xl font-bold mb-2 leading-tight">
-      Let's Build
-    </h2>
-    <h2 class="cin-reveal cin-delay-1 font-serif italic text-4xl md:text-7xl font-bold mb-8 leading-tight bg-gradient-to-r from-[#00f0ff] via-[#8b5cf6] to-[#f472b6] bg-clip-text" style="color: transparent; -webkit-background-clip: text;">
-      The Future
-    </h2>
-
-    <p class="cin-reveal cin-delay-2 text-white/35 text-lg max-w-lg mx-auto mb-12 leading-relaxed">
-      新しいプロジェクト、コラボレーション、技術的な挑戦——<br />
-      お気軽にお声がけください。
-    </p>
-
-    <div class="cin-reveal cin-delay-3 mb-16">
-      <a
-        href="mailto:hello@example.com"
-        class="inline-flex items-center gap-3 px-10 py-4 rounded-full border border-[#00f0ff]/30 text-[#00f0ff]
-               hover:bg-[#00f0ff]/10 hover:border-[#00f0ff]/50 hover:shadow-[0_0_40px_rgba(0,240,255,0.15)]
-               transition-all duration-500 text-sm tracking-[0.2em] uppercase"
-        data-cursor-hover
-      >
-        Get in Touch
-      </a>
+    <!-- CTA text -->
+    <div class="cin-reveal mb-12 md:mb-16">
+      <h2 class="mask-reveal text-[8vw] md:text-[4vw] lg:text-[3.5vw] leading-[1.3] tracking-[0.01em] font-light">
+        一緒に<span class="font-serif italic">何か</span>つくりませんか。
+      </h2>
     </div>
 
-    <!-- Social links -->
-    <div class="cin-reveal cin-delay-4 flex items-center justify-center gap-8">
+    <!-- Links with hover effects -->
+    <div class="cin-reveal cin-delay-1 flex flex-col md:flex-row gap-6 md:gap-12">
       <a
         href="https://github.com/XxxKMSxxX"
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex flex-col items-center gap-2"
-        data-cursor-hover
+        data-mouse-target="GITHUB"
+        class="contact-link group flex items-center gap-3 text-base md:text-lg tracking-[0.05em] text-white/40 hover:text-white transition-all duration-500"
       >
-        <span class="i-simple-icons-github text-xl text-white/25 group-hover:text-[#00f0ff] transition-colors duration-300"></span>
-        <span class="text-[9px] tracking-[0.2em] uppercase text-white/15 group-hover:text-white/40 transition-colors duration-300">GitHub</span>
+        <span class="w-8 h-px bg-white/10 group-hover:w-12 group-hover:bg-white/30 transition-all duration-500"></span>
+        <span>GitHub</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="stroke-current opacity-30 group-hover:opacity-80 transition-all duration-500 translate-x-0 group-hover:translate-x-1">
+          <path d="M1 1H9M9 1V9M9 1L1 9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </svg>
       </a>
       <a
         href="https://www.linkedin.com/in/%E4%BF%8A-%E6%9C%A8%E6%9D%91-104821375/"
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex flex-col items-center gap-2"
-        data-cursor-hover
+        data-mouse-target="LINKEDIN"
+        class="contact-link group flex items-center gap-3 text-base md:text-lg tracking-[0.05em] text-white/40 hover:text-white transition-all duration-500"
       >
-        <span class="i-simple-icons-linkedin text-xl text-white/25 group-hover:text-[#8b5cf6] transition-colors duration-300"></span>
-        <span class="text-[9px] tracking-[0.2em] uppercase text-white/15 group-hover:text-white/40 transition-colors duration-300">LinkedIn</span>
+        <span class="w-8 h-px bg-white/10 group-hover:w-12 group-hover:bg-white/30 transition-all duration-500"></span>
+        <span>LinkedIn</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="stroke-current opacity-30 group-hover:opacity-80 transition-all duration-500 translate-x-0 group-hover:translate-x-1">
+          <path d="M1 1H9M9 1V9M9 1L1 9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </svg>
       </a>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="border-t border-white/[0.03] py-8 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    <p class="text-white/15 text-xs tracking-wider">
-      &copy; {new Date().getFullYear()} Kimura Shun
-    </p>
-
-    <!-- Real-time clock + location -->
-    <div class="flex items-center gap-6">
-      <div class="flex items-center gap-2">
-        <span class="block w-1.5 h-1.5 rounded-full bg-green-500/60 animate-pulse"></span>
-        <span id="footer-clock" class="text-[10px] text-white/20 font-mono tracking-wider">--:--:--</span>
-        <span class="text-[10px] text-white/10 font-mono">JST</span>
-      </div>
-      <span class="text-[10px] text-white/10 font-mono tracking-wider">
-        35&deg;41'N, 139&deg;41'E
-      </span>
+<footer class="relative z-10 py-12 md:py-16 px-6 md:px-12">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+    <div>
+      <p class="font-heading text-sm font-medium tracking-[0.05em]">Kimura Shun</p>
+      <p class="text-xs text-white/20 mt-1 tracking-[0.05em]">&copy; {new Date().getFullYear()}</p>
     </div>
-
-    <p class="text-white/10 text-[10px] tracking-wider uppercase">
-      Astro + Three.js + GSAP
-    </p>
+    <div class="text-right">
+      <p class="text-[10px] tracking-[0.15em] text-white/20 uppercase mb-1">Tokyo, Japan</p>
+      <p class="text-xs text-white/40 tracking-[0.15em]">35&deg;41'N, 139&deg;41'E</p>
+      <p id="footer-clock" class="text-xs text-white/40 tracking-[0.15em] mt-0.5 font-light" style="font-variant-numeric: tabular-nums;">--:--:--</p>
+    </div>
   </div>
+
+  <!-- Horizontal line -->
+  <div class="line-h mt-8 w-full max-w-5xl mx-auto"></div>
 </footer>
 
 <script>
   function updateClock() {
     const el = document.getElementById('footer-clock');
     if (!el) return;
-    const now = new Date();
-    const time = now.toLocaleTimeString('ja-JP', {
+    el.textContent = new Date().toLocaleTimeString('ja-JP', {
       timeZone: 'Asia/Tokyo',
       hour12: false,
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
     });
-    el.textContent = time;
   }
-
   updateClock();
   setInterval(updateClock, 1000);
 </script>
