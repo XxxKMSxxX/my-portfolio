@@ -12,7 +12,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Kimura Shun - Co-Founder, CPO & CTO at AI Hikari, Inc. Full-Stack Engineer × AI Architect" />
+    <meta name="description" content="Kimura Shun — Full-Stack Engineer × AI Architect. Building products from frontend to infrastructure." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,8 +28,14 @@ const { title } = Astro.props;
       <div id="cursor-ring" class="absolute top-1/2 left-1/2 w-10 h-10 border border-[#00f0ff]/30 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300"></div>
     </div>
 
-    <!-- Film grain overlay (static texture, animated via CSS position shift) -->
-    <div id="grain" class="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03] grain-animate"></div>
+    <!-- Film grain: SVG feTurbulence (no tiling artifacts, GPU-composited) -->
+    <svg class="absolute w-0 h-0" aria-hidden="true">
+      <filter id="grain-noise">
+        <feTurbulence baseFrequency="0.65" numOctaves="3" seed="1" stitchTiles="stitch" type="fractalNoise" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+    </svg>
+    <div class="grain-overlay"></div>
 
     <!-- Letterbox bars (cinematic) -->
     <div class="fixed top-0 left-0 w-full h-[3vh] bg-[#020202] z-[100]"></div>
@@ -147,16 +153,38 @@ const { title } = Astro.props;
     transform: scaleX(1);
   }
 
-  /* ---- Film grain animation ---- */
-  @keyframes grainShift {
-    0% { background-position: 0 0; }
-    25% { background-position: -128px -64px; }
-    50% { background-position: 64px -128px; }
-    75% { background-position: -64px 128px; }
-    100% { background-position: 0 0; }
+  /* ---- Film grain (SVG turbulence + overlay blend) ---- */
+  .grain-overlay {
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    filter: url(#grain-noise);
+    opacity: 0.028;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 9998;
+    animation: grainDrift 0.4s steps(8) infinite;
   }
-  .grain-animate {
-    animation: grainShift 8s steps(4) infinite;
+
+  @keyframes grainDrift {
+    0%   { transform: translate(0, 0); }
+    12%  { transform: translate(-2%, -3%); }
+    25%  { transform: translate(3%, 1%); }
+    37%  { transform: translate(-1%, 2%); }
+    50%  { transform: translate(2%, -1%); }
+    62%  { transform: translate(-3%, 3%); }
+    75%  { transform: translate(1%, -2%); }
+    87%  { transform: translate(-2%, 1%); }
+    100% { transform: translate(0, 0); }
+  }
+
+  /* Reduce grain intensity on low-power devices */
+  @media (prefers-reduced-motion: reduce) {
+    .grain-overlay {
+      animation: none;
+      opacity: 0.015;
+    }
   }
 
   /* ---- Glow text ---- */
@@ -217,27 +245,6 @@ const { title } = Astro.props;
       if (dot) dot.style.transform = 'translate(-50%, -50%) scale(1)';
     });
   });
-
-  // ---- Film grain (static texture + CSS animation) ----
-  const grainCanvas = document.createElement('canvas');
-  const grainCtx = grainCanvas.getContext('2d');
-  grainCanvas.width = 512;
-  grainCanvas.height = 512;
-  const grainEl = document.getElementById('grain');
-
-  if (grainCtx && grainEl) {
-    const imageData = grainCtx.createImageData(512, 512);
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      const v = Math.random() * 255;
-      imageData.data[i] = v;
-      imageData.data[i + 1] = v;
-      imageData.data[i + 2] = v;
-      imageData.data[i + 3] = 255;
-    }
-    grainCtx.putImageData(imageData, 0, 0);
-    grainEl.style.backgroundImage = `url(${grainCanvas.toDataURL()})`;
-    grainEl.style.backgroundSize = '512px 512px';
-  }
 
   // ---- Progress bar ----
   const progressBar = document.getElementById('progress-bar');
