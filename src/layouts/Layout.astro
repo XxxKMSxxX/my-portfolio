@@ -16,19 +16,18 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
   <body>
-    <!-- Custom cursor -->
-    <div id="cursor" class="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block">
-      <div id="cursor-dot" class="w-2 h-2 bg-[#00f0ff] rounded-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-100"></div>
-      <div id="cursor-ring" class="absolute top-1/2 left-1/2 w-10 h-10 border border-[#00f0ff]/30 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300"></div>
+    <!-- Custom cursor (mix-blend-mode: difference) -->
+    <div id="cursor" class="cursor-wrap hidden md:block">
+      <div id="cursor-bg"></div>
     </div>
 
-    <!-- Film grain: SVG feTurbulence (no tiling artifacts, GPU-composited) -->
+    <!-- Film grain: SVG feTurbulence -->
     <svg class="absolute w-0 h-0" aria-hidden="true">
       <filter id="grain-noise">
         <feTurbulence baseFrequency="0.65" numOctaves="3" seed="1" stitchTiles="stitch" type="fractalNoise" />
@@ -37,12 +36,12 @@ const { title } = Astro.props;
     </svg>
     <div class="grain-overlay"></div>
 
-    <!-- Letterbox bars (cinematic) -->
-    <div class="fixed top-0 left-0 w-full h-[3vh] bg-[#020202] z-[100]"></div>
-    <div class="fixed bottom-0 left-0 w-full h-[3vh] bg-[#020202] z-[100]"></div>
+    <!-- Letterbox bars -->
+    <div class="fixed top-0 left-0 w-full h-[2.5vh] bg-[#020202] z-[100]"></div>
+    <div class="fixed bottom-0 left-0 w-full h-[2.5vh] bg-[#020202] z-[100]"></div>
 
     <!-- Progress bar -->
-    <div class="fixed top-0 left-0 w-full h-[3vh] z-[101] flex items-end">
+    <div class="fixed top-0 left-0 w-full h-[2.5vh] z-[101] flex items-end">
       <div id="progress-bar" class="h-px bg-gradient-to-r from-[#00f0ff] via-[#8b5cf6] to-[#f472b6] transition-none" style="width: 0%;"></div>
     </div>
 
@@ -77,11 +76,17 @@ const { title } = Astro.props;
 <style is:global>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html {
+    scroll-behavior: auto;
+    font-feature-settings: "palt" 1;
+  }
+
   body {
     background: #020202;
     color: #fff;
     font-family: 'Inter', 'Noto Sans JP', sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     cursor: none;
   }
@@ -89,8 +94,6 @@ const { title } = Astro.props;
   @media (max-width: 768px) {
     body { cursor: auto; }
   }
-
-  html { scroll-behavior: auto; }
 
   ::selection {
     background: rgba(0, 240, 255, 0.2);
@@ -100,6 +103,32 @@ const { title } = Astro.props;
   ::-webkit-scrollbar { width: 0; }
 
   .font-heading { font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif; }
+  .font-serif { font-family: 'Noto Serif Display', 'Noto Sans JP', serif; }
+
+  /* ---- Custom cursor (difference blend) ---- */
+  .cursor-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+
+  #cursor-bg {
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cursor-wrap.hovering #cursor-bg {
+    width: 80px;
+    height: 80px;
+  }
 
   /* ---- Cinematic reveals ---- */
   .cin-reveal {
@@ -123,13 +152,22 @@ const { title } = Astro.props;
   .split-char {
     display: inline-block;
     opacity: 0;
-    transform: translateY(40px) rotateX(-40deg);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(100%);
+    will-change: transform, opacity;
   }
   .split-char.visible {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0);
+  }
+
+  /* ---- Mask text reveal (scroll-linked) ---- */
+  .mask-reveal {
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 100%);
+    mask-image: linear-gradient(to right, black 0%, black 100%);
+    -webkit-mask-size: 0% 100%;
+    mask-size: 0% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
   }
 
   /* ---- Chapter title card ---- */
@@ -179,7 +217,6 @@ const { title } = Astro.props;
     100% { transform: translate(0, 0); }
   }
 
-  /* Reduce grain intensity on low-power devices */
   @media (prefers-reduced-motion: reduce) {
     .grain-overlay {
       animation: none;
@@ -202,13 +239,51 @@ const { title } = Astro.props;
   .chapter-dot.active span:first-child {
     color: rgba(255, 255, 255, 0.4) !important;
   }
+
+  /* ---- Marquee ---- */
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll var(--marquee-duration, 40s) linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* ---- Lenis ---- */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
 </style>
 
 <script>
-  // ---- Custom cursor ----
+  import Lenis from 'lenis';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ---- Lenis smooth scroll ----
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    touchMultiplier: 2,
+  });
+
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ---- Custom cursor (mix-blend-mode: difference) ----
   const cursor = document.getElementById('cursor');
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
+  const cursorBg = document.getElementById('cursor-bg');
   let mx = 0, my = 0, cx = 0, cy = 0;
 
   document.addEventListener('mousemove', (e) => {
@@ -217,8 +292,8 @@ const { title } = Astro.props;
   });
 
   function animateCursor() {
-    cx += (mx - cx) * 0.15;
-    cy += (my - cy) * 0.15;
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
     if (cursor) {
       cursor.style.transform = `translate(${cx}px, ${cy}px)`;
     }
@@ -226,24 +301,10 @@ const { title } = Astro.props;
   }
   animateCursor();
 
-  // Magnetic effect on interactive elements
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      if (ring) {
-        ring.style.width = '50px';
-        ring.style.height = '50px';
-        ring.style.borderColor = 'rgba(0, 240, 255, 0.6)';
-      }
-      if (dot) dot.style.transform = 'translate(-50%, -50%) scale(2)';
-    });
-    el.addEventListener('mouseleave', () => {
-      if (ring) {
-        ring.style.width = '40px';
-        ring.style.height = '40px';
-        ring.style.borderColor = 'rgba(0, 240, 255, 0.3)';
-      }
-      if (dot) dot.style.transform = 'translate(-50%, -50%) scale(1)';
-    });
+  // Hover scaling
+  document.querySelectorAll('a, button, [data-cursor-hover]').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor?.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursor?.classList.remove('hovering'));
   });
 
   // ---- Progress bar ----
@@ -285,27 +346,59 @@ const { title } = Astro.props;
     revealObserver.observe(el);
   });
 
-  // ---- Split text animation ----
+  // ---- Split text (GSAP powered) ----
   document.querySelectorAll('[data-split]').forEach(el => {
     const text = el.textContent ?? '';
-    el.textContent = '';
-    text.split('').forEach((char, i) => {
+    el.innerHTML = '';
+    const chars: HTMLSpanElement[] = [];
+    text.split('').forEach((char) => {
       const span = document.createElement('span');
       span.className = 'split-char';
-      span.style.transitionDelay = `${i * 0.03}s`;
       span.textContent = char === ' ' ? '\u00A0' : char;
       el.appendChild(span);
+      chars.push(span);
     });
 
-    const splitObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.split-char').forEach(ch => {
-            ch.classList.add('visible');
-          });
-        }
-      });
-    }, { threshold: 0.5 });
-    splitObserver.observe(el);
+    gsap.to(chars, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.03,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    });
+  });
+
+  // ---- Mask reveal (scroll-linked) ----
+  document.querySelectorAll('.mask-reveal').forEach(el => {
+    gsap.to(el, {
+      maskSize: '100% 100%',
+      webkitMaskSize: '100% 100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        end: 'top 30%',
+        scrub: 1,
+      },
+    });
+  });
+
+  // ---- Parallax elements ----
+  document.querySelectorAll('[data-parallax]').forEach(el => {
+    const speed = parseFloat((el as HTMLElement).dataset.parallax ?? '0.2');
+    gsap.to(el, {
+      y: () => -ScrollTrigger.maxScroll(window) * speed,
+      ease: 'none',
+      scrollTrigger: {
+        start: 0,
+        end: 'max',
+        scrub: 1,
+      },
+    });
   });
 </script>

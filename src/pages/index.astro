@@ -3,19 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import CinematicScene from '../components/CinematicScene.astro';
 import Prologue from '../components/Prologue.astro';
 import ChapterAbout from '../components/ChapterAbout.astro';
+import Marquee from '../components/Marquee.astro';
 import ChapterSkills from '../components/ChapterSkills.astro';
 import ChapterProjects from '../components/ChapterProjects.astro';
 import Epilogue from '../components/Epilogue.astro';
 ---
 
 <Layout title="Kimura Shun | Full-Stack Engineer × AI Architect">
-  <!-- Continuous 3D background -->
   <CinematicScene />
 
-  <!-- Content layers -->
   <main class="relative z-10">
     <Prologue />
     <ChapterAbout />
+    <Marquee />
     <ChapterSkills />
     <ChapterProjects />
     <Epilogue />
