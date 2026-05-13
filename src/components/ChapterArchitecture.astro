@@ -3,50 +3,50 @@ const architecturePatterns = [
   {
     title: 'Medallion Data Architecture',
     accent: '#00f0ff',
-    description: 'OVERSEEの需要予測基盤で採用。UN Comtrade等の外部データをBronze→Silver→Goldの3層で段階的に品質向上し、MLモデルに供給するデータパイプラインを設計・運用。',
+    context: '需要予測プラットフォームのデータ基盤',
+    description: '複数の外部データソースから取得した生データを、Bronze→Silver→Goldの3層で段階的にクレンジング・正規化し、MLモデルに高品質なデータを供給する設計。',
     details: [
-      'Apache Airflow DAGによるBronze→Silver→Gold自動パイプライン',
-      'DDD（ドメイン駆動設計）でデータドメインを分離',
-      'XGBoost / LightGBM / Prophet / PyTorch GNNのアンサンブル予測',
-      'FastAPI + dependency-injectorによるDI構成のAPI層',
+      'Airflow DAGでETLパイプラインをスケジューリング・自動化',
+      'DDDでデータドメインを分離し、レイヤー間の責務を明確化',
+      'XGBoost / Prophet / PyTorch GNN 等のアンサンブルで精度向上',
+      'DI構成のAPI層で予測結果をダッシュボードに配信',
     ],
-    project: 'OVERSEE',
   },
   {
-    title: 'Multi-Crate Workspace (Rust)',
+    title: 'Multi-Crate Rust Workspace',
     accent: '#f472b6',
-    description: 'bitflush（SolanaアービトラージBot）で採用。9クレートに責務分割し、オンチェーンプログラム・パス探索・DEXクライアント・戦略エンジンを疎結合に構成。',
+    context: 'ブロックチェーン上の高頻度取引システム',
+    description: '低レイテンシが求められるトレーディングBotを、責務ごとに9クレートへ分割。オンチェーンプログラム・グラフ探索・プロトコル通信・戦略エンジンを疎結合に構成し、安全性と拡張性を両立。',
     details: [
-      'Cargoワークスペースで9クレート分割（dex-core, path-finder, strategy等）',
-      'DirectCPIでJupiter API排除し40-75K CU/swapのレイテンシ実現',
-      'Profit Guard PDA でオンチェーン利益検証・自動リバート',
-      'Yellowstone gRPC + tonic でリアルタイムプール変動検出',
+      'グラフアルゴリズムで複数取引所をまたぐ最適経路を探索',
+      'gRPCストリーミングで市場変動をミリ秒単位でリアルタイム検出',
+      'オンチェーンの利益検証ロジックで損失リスクをゼロに抑制',
+      'Prometheus + Grafanaでシステム全体のメトリクスを可視化',
     ],
-    project: 'bitflush',
   },
   {
-    title: 'PWA + Server Actions Architecture',
+    title: 'PWA + Server Actions',
     accent: '#34d399',
-    description: 'PETTAS（ペットケアPWA）で採用。Next.js 16 App Router + Server Actionsを軸に、オフラインファースト・プッシュ通知・サブスクリプション課金を統合した現代的なフルスタック設計。',
+    context: 'サブスクリプション型SaaS（BtoC）',
+    description: 'Next.js App Router + Server Actionsを軸に、オフライン対応・プッシュ通知・課金・AI連携を統合したフルスタックPWA。ネイティブアプリに近い体験をWeb技術だけで実現。',
     details: [
-      'Serwistによるサービスワーカー管理（オフライン + Web Push）',
-      'Claude AI Vision + Tesseract.jsのサーバー/クライアント併用OCR',
-      'Stripe Checkout（月額/年額/買い切り + 14日間トライアル）',
-      'BetterAuth + Google OAuth + Turso (libSQL) による認証・DB層',
+      'サービスワーカーでオフラインファースト + Web Push通知',
+      'LLM Vision APIとクライアントサイドOCRを併用した画像認識',
+      'Stripe Checkoutで複数プラン + トライアル付き課金',
+      'Vitest / Playwright / Lighthouse CIの3層で品質担保',
     ],
-    project: 'PETTAS',
   },
   {
     title: 'AI-Driven Content Pipeline',
     accent: '#fbbf24',
-    description: 'PropScout JPで採用。政府オープンデータ取得→ML分析→可視化→Claude AIによる記事自動生成→SNS投稿までの一気通貫パイプラインを構築。',
+    context: 'データ分析メディアの自動運用',
+    description: '政府オープンデータの取得→ML分析→可視化→LLMによる記事自動生成→複数SNSへの同時投稿まで、人手を介さず一気通貫で回るコンテンツパイプラインを構築。',
     details: [
-      'scikit-learn Gradient Boostingによる価格予測（R²=0.74）',
-      'Claude APIで分析結果→日英記事を自動生成',
-      'Gemini Imagen 4でサムネイル自動生成',
-      'sns-shared-lib連携でX/Bluesky/Threadsへ自動投稿',
+      '機械学習モデルで価格予測・リスク評価を自動算出',
+      'LLM APIで分析結果を日英2言語の記事に変換',
+      '画像生成AIでサムネイルを自動作成',
+      '共有ライブラリ経由でX / Bluesky / Threadsに同時投稿',
     ],
-    project: 'PropScout JP',
   },
 ];
 
@@ -55,30 +55,30 @@ const devPractices = [
     title: 'Infrastructure as Code',
     icon: 'i-simple-icons-terraform',
     items: [
-      'Terraform (HCL) でAWSインフラをコード管理（Cryptra-Infra, TradeDataProcessor）',
-      'Kubernetes + Helm + helmfileでコンテナオーケストレーション（k8s-infrastructure）',
-      'Docker Composeで開発環境統一（bitflush: offchain + Prometheus + Grafana）',
-      'AWS ECS / Amplify / Vercel を用途別に使い分け',
+      'TerraformでAWSインフラ（VPC / ECS / IAM等）をコード管理',
+      'Kubernetes + Helm + ArgoCD で GitOps 継続的デリバリー',
+      'Docker Composeでアプリ + 監視基盤の開発環境を統一',
+      'AWS ECS / Vercel / Amplify を用途に応じて使い分け',
     ],
   },
   {
     title: 'Testing & Quality',
     icon: 'i-simple-icons-vitest',
     items: [
-      'bitflush: 854テストでアービトラージロジックの網羅的検証',
-      'PETTAS: Vitest + Playwright + Lighthouse CIの3層テスト',
-      'sns-shared-lib: Vitest + coverage-v8で品質担保',
-      'mypy (strict) / Clippy / ESLint による静的解析徹底',
+      '850+テストで取引ロジックの網羅的な振る舞い検証',
+      'Vitest + Playwright + Lighthouse CIの3層テスト戦略',
+      'mypy (strict) / Clippy / ESLint による言語横断の静的解析',
+      'GitHub Actions で PR ごとにCI自動実行',
     ],
   },
   {
     title: 'Monitoring & Security',
     icon: 'i-simple-icons-prometheus',
     items: [
-      'Prometheus + Grafanaでbitflushのメトリクスリアルタイム監視',
-      'Sentry + Vercel Analyticsでフロントエンドエラー追跡（PETTAS）',
-      'keypair zeroizeによるオンチェーン秘密鍵のメモリ安全対策',
-      'jemalloc（tikv-jemallocator）でメモリフラグメンテーション対策',
+      'Prometheus + Grafana でシステムメトリクスをリアルタイム監視',
+      'Sentry + Vercel Analytics でフロントエンドのエラー追跡',
+      '秘密鍵のメモリ安全対策（zeroize）と暗号化トークン管理',
+      'jemalloc によるメモリフラグメンテーション最適化',
     ],
   },
 ];
@@ -100,8 +100,8 @@ const devPractices = [
       </h2>
     </div>
     <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-xl mb-16 md:mb-24">
-      実際のプロダクトで採用・運用してきたアーキテクチャパターン。<br />
-      要件に応じて最適な設計を選び、進化可能なシステムを構築します。
+      「どの技術を使うか」より「どう設計するか」がプロダクトの寿命を決める。<br />
+      実際に運用してきたアーキテクチャパターンと開発プラクティスです。
     </p>
 
     <!-- Architecture patterns -->
@@ -117,7 +117,7 @@ const devPractices = [
                   <div class="w-2 h-2 rounded-full flex-shrink-0" style={`background: ${pattern.accent};`}></div>
                   <h3 class="font-heading text-base md:text-lg font-medium leading-tight">{pattern.title}</h3>
                 </div>
-                <p class="text-[10px] tracking-[0.1em] text-white/15 uppercase mb-3">Applied in: {pattern.project}</p>
+                <p class="text-[11px] tracking-[0.05em] text-white/20 mb-3">{pattern.context}</p>
                 <p class="text-[13px] text-white/30 leading-[1.7] font-light group-hover:text-white/45 transition-colors duration-500">
                   {pattern.description}
                 </p>
