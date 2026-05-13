@@ -1,0 +1,146 @@
+---
+const architecturePatterns = [
+  {
+    title: 'Microservices / Modular Monolith',
+    accent: '#00f0ff',
+    description: 'ドメイン境界に基づいてサービスを分割。初期はモジュラーモノリスで素早くリリースし、スケール要件に応じてマイクロサービスへ段階的に分離するアプローチ。',
+    details: [
+      'DDD（ドメイン駆動設計）で境界コンテキストを定義',
+      'gRPC / GraphQL Federation でサービス間通信',
+      'イベントドリブンで疎結合な非同期連携',
+      'サーキットブレーカー / リトライ / バルクヘッドで耐障害性を確保',
+    ],
+  },
+  {
+    title: 'Event-Driven Architecture',
+    accent: '#8b5cf6',
+    description: 'Apache Kafka / SQS をバックボーンに、イベントソーシング + CQRS で書き込みと読み取りを分離。リアルタイム性とスケーラビリティを両立する設計。',
+    details: [
+      'Kafka によるイベントストリーミング基盤',
+      'CQRS で読み書き最適化（PostgreSQL + DuckDB）',
+      'Outbox パターンでトランザクション整合性を保証',
+      'Dead Letter Queue + 自動リトライで障害回復',
+    ],
+  },
+  {
+    title: 'AI Agent Architecture',
+    accent: '#34d399',
+    description: 'LLMを核とした自律エージェントの設計パターン。ツール呼び出し・マルチステップ推論・メモリ管理を構造化し、信頼性の高いAIシステムを構築。',
+    details: [
+      'ReAct / Plan-and-Execute パターンでマルチステップ推論',
+      'RAG（検索拡張生成）+ pgvector でコンテキスト注入',
+      'MCP Server で外部ツール・APIを統合',
+      'Guardrails / Evaluation で出力品質を担保',
+    ],
+  },
+  {
+    title: 'Data Platform (Medallion)',
+    accent: '#fbbf24',
+    description: 'Bronze → Silver → Gold のMedallionアーキテクチャでデータレイクを構築。ELTパイプラインで生データから分析可能な状態まで段階的に品質を向上。',
+    details: [
+      'Meltano (Singer) で多様なデータソースからEL',
+      'dbt でSQL変換・テスト・ドキュメント自動生成',
+      'Great Expectations でデータ品質チェック自動化',
+      'Airflow / Dagster でオーケストレーション',
+    ],
+  },
+];
+
+const devPractices = [
+  {
+    title: 'Infrastructure as Code',
+    icon: 'i-simple-icons-terraform',
+    items: ['Terraform でマルチAZ / マルチリージョン構成', 'Kubernetes (EKS) + Helm でコンテナオーケストレーション', 'ArgoCD による GitOps 自動デプロイ', 'Datadog / CloudWatch でオブザーバビリティ'],
+  },
+  {
+    title: 'CI/CD & Quality',
+    icon: 'i-simple-icons-githubactions',
+    items: ['GitHub Actions でビルド・テスト・デプロイを自動化', 'TDD（テスト駆動開発）でリグレッション防止', 'ESLint / Clippy / mypy で静的解析', 'Playwright / Vitest でE2E + ユニットテスト'],
+  },
+  {
+    title: 'Security & Reliability',
+    icon: 'i-simple-icons-letsencrypt',
+    items: ['OWASP Top 10 に基づくセキュリティ設計', 'RBAC / ABAC による細粒度アクセス制御', 'WAF + Rate Limiting + DDoS対策', 'ゼロダウンタイムデプロイ（Blue-Green / Canary）'],
+  },
+];
+---
+
+<section id="architecture" class="relative py-32 md:py-40 overflow-hidden">
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12">
+    <!-- Section number -->
+    <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
+      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">02.5</span>
+      <div class="w-8 h-px bg-white/10"></div>
+      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Architecture</span>
+    </div>
+
+    <!-- Title -->
+    <div class="cin-reveal mb-6 md:mb-8">
+      <h2 class="mask-reveal text-[6vw] md:text-[3.5vw] lg:text-[2.8vw] leading-[1.4] tracking-[0.01em] font-light">
+        設計の<span class="font-serif italic">引き出し</span>
+      </h2>
+    </div>
+    <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-xl mb-16 md:mb-24">
+      「どの技術を使うか」より「どう設計するか」がプロダクトの寿命を決める。<br />
+      要件に応じて最適なアーキテクチャパターンを選定し、進化可能な設計を構築します。
+    </p>
+
+    <!-- Architecture patterns -->
+    <div class="space-y-6 md:space-y-8 mb-24 md:mb-32">
+      {architecturePatterns.map((pattern, i) => (
+        <div class="cin-reveal arch-card group">
+          <div class="line-h w-full"></div>
+          <div class="py-6 md:py-10 px-2 md:px-6 -mx-2 md:-mx-6 rounded-lg transition-all duration-500 hover:bg-white/[0.015]">
+            <div class="grid md:grid-cols-12 gap-4 md:gap-8">
+              <!-- Title col -->
+              <div class="md:col-span-4">
+                <div class="flex items-center gap-2.5 mb-3">
+                  <div class="w-2 h-2 rounded-full flex-shrink-0" style={`background: ${pattern.accent};`}></div>
+                  <h3 class="font-heading text-base md:text-lg font-medium leading-tight">{pattern.title}</h3>
+                </div>
+                <p class="text-[13px] text-white/30 leading-[1.7] font-light group-hover:text-white/45 transition-colors duration-500">
+                  {pattern.description}
+                </p>
+              </div>
+              <!-- Details col -->
+              <div class="md:col-span-8">
+                <div class="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 md:pt-1">
+                  {pattern.details.map(detail => (
+                    <div class="flex items-start gap-2.5">
+                      <span class="w-px h-3 mt-1 flex-shrink-0" style={`background: ${pattern.accent}40;`}></span>
+                      <p class="text-[12px] text-white/25 leading-[1.6] font-light group-hover:text-white/40 transition-colors duration-500">{detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      <div class="line-h w-full"></div>
+    </div>
+
+    <!-- Development Practices -->
+    <div>
+      <h3 class="cin-reveal text-xs tracking-[0.2em] text-white/20 uppercase mb-10">Development Practices</h3>
+      <div class="grid md:grid-cols-3 gap-6" data-stagger-parent>
+        {devPractices.map(practice => (
+          <div class="cin-reveal group p-5 rounded-lg border border-white/[0.04] bg-white/[0.01] hover:bg-white/[0.025] hover:border-white/[0.08] transition-all duration-500" data-stagger-child>
+            <div class="flex items-center gap-3 mb-4">
+              <span class={`${practice.icon} text-base text-white/20 group-hover:text-white/50 transition-colors duration-500`}></span>
+              <h4 class="text-sm font-medium tracking-[0.02em]">{practice.title}</h4>
+            </div>
+            <ul class="space-y-2.5">
+              {practice.items.map(item => (
+                <li class="flex items-start gap-2 text-[12px] text-white/25 leading-[1.6] font-light group-hover:text-white/40 transition-colors duration-500">
+                  <span class="w-1 h-1 rounded-full bg-white/10 mt-1.5 flex-shrink-0"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
