@@ -4,55 +4,67 @@ const projects = [
     id: 'demand-forecast',
     title: 'Demand Forecast AI Agent',
     subtitle: '需要予測AIエージェントプラットフォーム',
-    description: '対話型インターフェースで市場データと予測モデルを統合し、サプライチェーンの意思決定を加速するAIエージェント基盤。',
-    tags: ['Next.js', 'FastAPI', 'AWS EKS', 'SageMaker', 'Terraform'],
+    description: '対話型インターフェースで市場データと予測モデルを統合し、サプライチェーンの意思決定を加速するAIエージェント基盤。LSTMベースの時系列予測とRAGによるレポート自動生成を実装。',
+    role: 'アーキテクチャ設計 / バックエンド / インフラ / ML',
+    highlights: ['LSTM + Attention による需要予測モデル', 'RAG で市場レポート自動生成', 'EKS + Terraform でマルチAZ構成', 'SageMaker によるモデル学習パイプライン'],
+    tags: ['Next.js', 'FastAPI', 'AWS EKS', 'SageMaker', 'Terraform', 'PostgreSQL', 'LangChain'],
     accent: '#00f0ff',
   },
   {
     id: 'trade-ai',
     title: 'International Trade AI',
     subtitle: '国際貿易AIプラットフォーム',
-    description: 'HSコード分類、関税計算、FTA活用判断、規制チェックをAIが一括処理。国際貿易の複雑な意思決定を秒速に。',
-    tags: ['Next.js', 'Turso', 'Claude AI', 'Drizzle ORM'],
+    description: 'HSコード分類、関税計算、FTA活用判断、規制チェックをAIが一括処理。貿易実務者の業務時間を大幅に削減するSaaS。',
+    role: 'フルスタック / AI設計 / プロダクトマネジメント',
+    highlights: ['Claude AIによるHSコード自動分類', 'マルチステップエージェント設計', 'Turso (libSQL) でエッジDB', 'Stripe組込み課金'],
+    tags: ['Next.js', 'Turso', 'Claude AI', 'Drizzle ORM', 'Vercel', 'Stripe'],
     accent: '#8b5cf6',
   },
   {
     id: 'arbitrage',
     title: 'DEX Arbitrage Bot',
-    subtitle: 'アトミックアービトラージBot',
-    description: '13のDEXを横断するブロックチェーン上のアービトラージBot。Rust × Anchorで構築、Flash Loan・MEV統合。',
-    tags: ['Rust', 'Anchor', 'Solana', 'gRPC'],
+    subtitle: 'Solanaアトミックアービトラージ',
+    description: '13のDEXを横断するオンチェーンアービトラージBot。ブロックチェーン上でアトミックに裁定取引を実行し、Flash LoanとMEVバンドルを統合。',
+    role: 'システム設計 / Rustバックエンド / オンチェーンプログラム',
+    highlights: ['Rust × Anchor でオンチェーンプログラム', '13 DEX間の最適経路探索アルゴリズム', 'Jito MEV バンドル統合', 'Yellowstone gRPC でリアルタイム監視'],
+    tags: ['Rust', 'Anchor', 'Solana', 'gRPC', 'Jito MEV', 'Flash Loan'],
     accent: '#f472b6',
-  },
-  {
-    id: 'pet-app',
-    title: 'Pet Care PWA',
-    subtitle: 'ペットケア記録アプリ',
-    description: '投薬・通院・健康記録を家族で共有するPWA。AIによる健康レポート自動生成、プッシュ通知でリマインド。',
-    tags: ['Next.js', 'Turso', 'Claude AI', 'PWA'],
-    accent: '#34d399',
-  },
-  {
-    id: 'realestate',
-    title: 'Real Estate Risk Analyzer',
-    subtitle: '不動産リスク分析AI',
-    description: '政府オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。',
-    tags: ['Python', 'ML', 'Gov API', 'MCP Server'],
-    accent: '#fbbf24',
   },
   {
     id: 'agent-platform',
     title: 'AI Agent Runtime',
     subtitle: '自律実行AIエージェント基盤',
-    description: 'Rust × axum × WASMで構築した自律AIエージェント実行基盤。マルチクレート構成で拡張性と安全性を両立。',
-    tags: ['Rust', 'axum', 'WASM', 'PostgreSQL'],
+    description: 'Rust × axum × WASMで構築した自律AIエージェント実行基盤。マルチクレート構成で拡張性と安全性を両立し、プラグインをWASMサンドボックスで安全に実行。',
+    role: 'アーキテクチャ設計 / Rust実装',
+    highlights: ['WASMサンドボックスによるプラグイン隔離', 'マルチクレートのモジュラー設計', 'axum + Tower ミドルウェアスタック', 'PostgreSQL + pgvector でコンテキスト管理'],
+    tags: ['Rust', 'axum', 'WASM', 'PostgreSQL', 'pgvector', 'Tower'],
     accent: '#f97316',
+  },
+  {
+    id: 'realestate',
+    title: 'Real Estate Risk Analyzer',
+    subtitle: '不動産リスク分析AI',
+    description: '政府オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。MCPサーバーとして外部AIエージェントから利用可能。',
+    role: 'データパイプライン / ML / API設計',
+    highlights: ['国土地理院 / ハザードマップ API 統合', 'XGBoost による価格予測モデル', 'MCPサーバー化でAIエージェント連携', 'Medallionアーキテクチャでデータ整理'],
+    tags: ['Python', 'XGBoost', 'MCP Server', 'FastAPI', 'DuckDB', 'dbt'],
+    accent: '#fbbf24',
+  },
+  {
+    id: 'pet-app',
+    title: 'Pet Care PWA',
+    subtitle: 'ペットケア記録アプリ',
+    description: '投薬・通院・健康記録を家族で共有するPWA。AIによる健康トレンド分析とレポート自動生成、プッシュ通知でリマインド。',
+    role: 'フルスタック / AI / UXデザイン',
+    highlights: ['オフラインファーストのPWA設計', 'Claude AIで健康レポート自動生成', 'Web Pushでリマインド通知', 'Turso によるマルチデバイス同期'],
+    tags: ['Next.js', 'Turso', 'Claude AI', 'PWA', 'Web Push', 'Vercel'],
+    accent: '#34d399',
   },
 ];
 ---
 
 <section id="projects" class="relative py-32 md:py-40">
-  <div class="max-w-5xl mx-auto px-6 md:px-12">
+  <div class="max-w-6xl mx-auto px-6 md:px-12">
     <!-- Section number -->
     <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
       <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">03</span>
@@ -60,12 +72,16 @@ const projects = [
       <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Projects</span>
     </div>
 
-    <!-- Title -->
-    <div class="cin-reveal mb-16 md:mb-24">
+    <!-- Title + lead -->
+    <div class="cin-reveal mb-6 md:mb-8">
       <h2 class="mask-reveal text-[6vw] md:text-[3.5vw] lg:text-[2.8vw] leading-[1.4] tracking-[0.01em] font-light">
         つくってきた<span class="font-serif italic">もの</span>たち
       </h2>
     </div>
+    <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-xl mb-16 md:mb-24">
+      業務・個人開発を問わず、設計からデプロイまで一貫して手がけたプロジェクト。
+      すべてのプロジェクトでアーキテクチャ選定から技術的意思決定をリードしています。
+    </p>
 
     <!-- Project list -->
     <div class="space-y-0">
@@ -73,42 +89,55 @@ const projects = [
         <article class="project-item group" data-cursor-hover data-mouse-target={project.title} data-accent={project.accent}>
           <div class="line-h w-full"></div>
           <div class="py-8 md:py-12 cin-reveal relative">
-            <!-- Hover accent glow (background) -->
+            <!-- Hover accent glow -->
             <div
-              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-              style={`background: linear-gradient(90deg, ${project.accent}05 0%, transparent 60%);`}
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-lg"
+              style={`background: linear-gradient(135deg, ${project.accent}06 0%, transparent 50%);`}
             ></div>
 
-            <div class="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-12">
-              <!-- Left: number + title -->
-              <div class="flex-1">
-                <div class="flex items-center gap-3">
-                  <span class="project-num font-heading text-3xl md:text-4xl font-extralight tabular-nums transition-colors duration-500" style={`color: rgba(255,255,255,0.08);`} data-hover-color={project.accent}>
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <div class="w-4 h-px bg-white/10 group-hover:w-8 transition-all duration-500"></div>
+            <div class="relative">
+              <!-- Header: number + title + role -->
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-12 mb-4 md:mb-6">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="project-num font-heading text-3xl md:text-4xl font-extralight tabular-nums transition-colors duration-500" style="color: rgba(255,255,255,0.06);" data-hover-color={project.accent}>
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <div class="w-4 h-px bg-white/10 group-hover:w-8 transition-all duration-500"></div>
+                    <span class="text-[10px] tracking-[0.15em] text-white/15 uppercase hidden md:inline">{project.role}</span>
+                  </div>
+                  <h3 class="font-heading text-xl md:text-2xl lg:text-3xl font-medium leading-tight group-hover:text-white transition-colors duration-500">
+                    {project.title}
+                  </h3>
+                  <p class="text-xs text-white/25 mt-1 tracking-wide group-hover:text-white/40 transition-colors duration-500">{project.subtitle}</p>
                 </div>
-                <h3 class="font-heading text-xl md:text-2xl lg:text-3xl font-medium mt-3 leading-tight group-hover:text-white transition-colors duration-500">
-                  {project.title}
-                </h3>
-                <p class="text-xs text-white/25 mt-1 tracking-wide group-hover:text-white/40 transition-colors duration-500">{project.subtitle}</p>
-              </div>
-
-              <!-- Right: description + tags -->
-              <div class="md:max-w-sm md:text-right">
-                <p class="text-sm text-white/30 leading-relaxed font-light group-hover:text-white/50 transition-colors duration-500">
-                  {project.description}
-                </p>
-                <div class="flex flex-wrap md:justify-end gap-2 mt-4">
+                <!-- Tags (top-right on desktop) -->
+                <div class="flex flex-wrap md:justify-end gap-1.5 mt-2 md:mt-1 md:max-w-xs">
                   {project.tags.map(tag => (
-                    <span
-                      class="text-[10px] tracking-[0.1em] text-white/15 uppercase px-2 py-0.5 border border-white/[0.04] rounded-sm group-hover:border-white/[0.08] group-hover:text-white/30 transition-all duration-500"
-                    >
+                    <span class="text-[9px] tracking-[0.08em] text-white/15 uppercase px-2 py-0.5 border border-white/[0.04] rounded-sm group-hover:border-white/[0.08] group-hover:text-white/30 transition-all duration-500">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
+
+              <!-- Body: description + highlights -->
+              <div class="grid md:grid-cols-2 gap-4 md:gap-12">
+                <p class="text-sm text-white/30 leading-[1.8] font-light group-hover:text-white/50 transition-colors duration-500">
+                  {project.description}
+                </p>
+                <ul class="space-y-2">
+                  {project.highlights.map(h => (
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/20 font-light group-hover:text-white/35 transition-colors duration-500">
+                      <span class="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={`background: ${project.accent}50;`}></span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Mobile role -->
+              <p class="text-[10px] tracking-[0.15em] text-white/15 uppercase mt-4 md:hidden">{project.role}</p>
             </div>
           </div>
         </article>
@@ -125,10 +154,10 @@ const projects = [
     if (!num || !accent) return;
 
     item.addEventListener('mouseenter', () => {
-      num.style.color = accent + '60';
+      num.style.color = accent + '50';
     });
     item.addEventListener('mouseleave', () => {
-      num.style.color = 'rgba(255,255,255,0.08)';
+      num.style.color = 'rgba(255,255,255,0.06)';
     });
   });
 </script>
