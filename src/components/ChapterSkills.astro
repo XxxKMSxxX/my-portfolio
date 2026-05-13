@@ -16,7 +16,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     accent: '#00f0ff',
-    description: '型安全なTS/Rustを軸に、用途に応じて言語を使い分ける',
+    description: 'Webアプリ・高頻度取引Bot・データ分析、用途で言語を使い分ける',
     items: [
       { name: 'TypeScript', url: 'https://www.typescriptlang.org/', icon: 'i-simple-icons-typescript' },
       { name: 'Rust', url: 'https://www.rust-lang.org/', icon: 'i-simple-icons-rust' },
@@ -29,7 +29,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Frontend',
     accent: '#8b5cf6',
-    description: 'SSR/SSG/SPAを使い分け、パフォーマンスとUXを両立',
+    description: 'PWA・ダッシュボード・LPをApp Router + Server Actionsで構築',
     items: [
       { name: 'React', url: 'https://react.dev/', icon: 'i-simple-icons-react' },
       { name: 'Next.js', url: 'https://nextjs.org/', icon: 'i-simple-icons-nextdotjs' },
@@ -44,7 +44,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Backend',
     accent: '#f472b6',
-    description: 'リアルタイム通信からマイクロサービスまで、用途に最適なスタックを選定',
+    description: 'REST API・gRPC・WebSocketを要件に応じて設計・実装',
     items: [
       { name: 'Node.js', url: 'https://nodejs.org/', icon: 'i-simple-icons-nodedotjs' },
       { name: 'Hono', url: 'https://hono.dev/', icon: 'i-simple-icons-hono' },
@@ -59,15 +59,14 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'AI / ML',
     accent: '#34d399',
-    description: 'RAG・エージェント・予測モデルの設計から本番運用まで一貫して構築',
+    description: 'LLM連携・画像認識・時系列予測・グラフNNまで幅広く実装・運用',
     items: [
-      { name: 'AWS Bedrock', url: 'https://aws.amazon.com/bedrock/', icon: 'i-simple-icons-amazonaws' },
       { name: 'Claude API', url: 'https://docs.anthropic.com/', icon: 'i-simple-icons-anthropic' },
-      { name: 'LangChain', url: 'https://www.langchain.com/', icon: 'i-simple-icons-langchain' },
-      { name: 'LangGraph', url: 'https://www.langchain.com/langgraph' },
-      { name: 'SageMaker', url: 'https://aws.amazon.com/sagemaker/', icon: 'i-simple-icons-amazonaws' },
-      { name: 'pgvector', url: 'https://github.com/pgvector/pgvector' },
-      { name: 'LSTM / Attention', url: 'https://pytorch.org/', icon: 'i-simple-icons-pytorch' },
+      { name: 'PyTorch', url: 'https://pytorch.org/', icon: 'i-simple-icons-pytorch' },
+      { name: 'XGBoost', url: 'https://xgboost.readthedocs.io/' },
+      { name: 'scikit-learn', url: 'https://scikit-learn.org/', icon: 'i-simple-icons-scikitlearn' },
+      { name: 'MLflow', url: 'https://mlflow.org/', icon: 'i-simple-icons-mlflow' },
+      { name: 'Qdrant', url: 'https://qdrant.tech/' },
       { name: 'MCP Server', url: 'https://modelcontextprotocol.io/', icon: 'i-simple-icons-anthropic' },
       { name: 'Vercel AI SDK', url: 'https://sdk.vercel.ai/', icon: 'i-simple-icons-vercel' },
     ],
@@ -75,12 +74,12 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Database',
     accent: '#fbbf24',
-    description: 'OLTP/OLAP/時系列/ベクトルDBを要件に応じて使い分け',
+    description: 'エッジDB・RDB・時系列DB・ベクトルDBを要件で選定',
     items: [
       { name: 'PostgreSQL', url: 'https://www.postgresql.org/', icon: 'i-simple-icons-postgresql' },
       { name: 'Turso', url: 'https://turso.tech/', icon: 'i-simple-icons-turso' },
       { name: 'DuckDB', url: 'https://duckdb.org/', icon: 'i-simple-icons-duckdb' },
-      { name: 'TimescaleDB', url: 'https://www.timescale.com/', icon: 'i-simple-icons-timescale' },
+      { name: 'InfluxDB', url: 'https://www.influxdata.com/', icon: 'i-simple-icons-influxdb' },
       { name: 'Redis', url: 'https://redis.io/', icon: 'i-simple-icons-redis' },
       { name: 'Drizzle ORM', url: 'https://orm.drizzle.team/', icon: 'i-simple-icons-drizzle' },
       { name: 'Prisma', url: 'https://www.prisma.io/', icon: 'i-simple-icons-prisma' },
@@ -89,7 +88,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Infrastructure',
     accent: '#f97316',
-    description: 'IaCでマルチAZ構成を構築し、GitOpsで自動デプロイ',
+    description: 'IaCで本番クラスタを構築し、GitOpsで継続的デリバリー',
     items: [
       { name: 'AWS', url: 'https://aws.amazon.com/', icon: 'i-simple-icons-amazonaws' },
       { name: 'Vercel', url: 'https://vercel.com/', icon: 'i-simple-icons-vercel' },
@@ -98,13 +97,14 @@ const skillCategories: SkillCategory[] = [
       { name: 'ArgoCD', url: 'https://argoproj.github.io/cd/', icon: 'i-simple-icons-argo' },
       { name: 'Docker', url: 'https://www.docker.com/', icon: 'i-simple-icons-docker' },
       { name: 'GitHub Actions', url: 'https://github.com/features/actions', icon: 'i-simple-icons-githubactions' },
-      { name: 'Datadog', url: 'https://www.datadoghq.com/', icon: 'i-simple-icons-datadog' },
+      { name: 'Prometheus', url: 'https://prometheus.io/', icon: 'i-simple-icons-prometheus' },
+      { name: 'Grafana', url: 'https://grafana.com/', icon: 'i-simple-icons-grafana' },
     ],
   },
   {
     title: 'Data Engineering',
     accent: '#06b6d4',
-    description: 'ELT/Medallionアーキテクチャで分析基盤を設計・運用',
+    description: '生データ→分析可能な状態まで段階的に品質を高めるパイプライン設計',
     items: [
       { name: 'Meltano', url: 'https://meltano.com/', icon: 'i-simple-icons-meltano' },
       { name: 'dbt', url: 'https://www.getdbt.com/', icon: 'i-simple-icons-dbt' },
@@ -117,7 +117,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Blockchain',
     accent: '#a78bfa',
-    description: 'DeFi・MEV・オンチェーン分析の実践的な開発経験',
+    description: 'DEXアービトラージ・マーケットメイキングBotを設計・運用',
     items: [
       { name: 'Solana', url: 'https://solana.com/', icon: 'i-simple-icons-solana' },
       { name: 'Anchor', url: 'https://www.anchor-lang.com/' },

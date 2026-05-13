@@ -1,64 +1,108 @@
 ---
 const projects = [
   {
-    id: 'demand-forecast',
-    title: 'Demand Forecast AI Agent',
-    subtitle: '需要予測AIエージェントプラットフォーム',
-    description: '対話型インターフェースで市場データと予測モデルを統合し、サプライチェーンの意思決定を加速するAIエージェント基盤。LSTMベースの時系列予測とRAGによるレポート自動生成を実装。',
-    role: 'アーキテクチャ設計 / バックエンド / インフラ / ML',
-    highlights: ['LSTM + Attention による需要予測モデル', 'RAG で市場レポート自動生成', 'EKS + Terraform でマルチAZ構成', 'SageMaker によるモデル学習パイプライン'],
-    tags: ['Next.js', 'FastAPI', 'AWS EKS', 'SageMaker', 'Terraform', 'PostgreSQL', 'LangChain'],
-    accent: '#00f0ff',
-  },
-  {
-    id: 'trade-ai',
-    title: 'International Trade AI',
-    subtitle: '国際貿易AIプラットフォーム',
-    description: 'HSコード分類、関税計算、FTA活用判断、規制チェックをAIが一括処理。貿易実務者の業務時間を大幅に削減するSaaS。',
-    role: 'フルスタック / AI設計 / プロダクトマネジメント',
-    highlights: ['Claude AIによるHSコード自動分類', 'マルチステップエージェント設計', 'Turso (libSQL) でエッジDB', 'Stripe組込み課金'],
-    tags: ['Next.js', 'Turso', 'Claude AI', 'Drizzle ORM', 'Vercel', 'Stripe'],
-    accent: '#8b5cf6',
-  },
-  {
-    id: 'arbitrage',
-    title: 'DEX Arbitrage Bot',
-    subtitle: 'Solanaアトミックアービトラージ',
-    description: '13のDEXを横断するオンチェーンアービトラージBot。ブロックチェーン上でアトミックに裁定取引を実行し、Flash LoanとMEVバンドルを統合。',
-    role: 'システム設計 / Rustバックエンド / オンチェーンプログラム',
-    highlights: ['Rust × Anchor でオンチェーンプログラム', '13 DEX間の最適経路探索アルゴリズム', 'Jito MEV バンドル統合', 'Yellowstone gRPC でリアルタイム監視'],
-    tags: ['Rust', 'Anchor', 'Solana', 'gRPC', 'Jito MEV', 'Flash Loan'],
+    id: 'bitflush',
+    title: 'Solana Atomic Arbitrage Bot',
+    subtitle: 'DEX間アトミックアービトラージ — 13 DEX / 854 Tests',
+    description: 'Solana上の13のDEXを横断するアービトラージBot。Flash Loan借入→マルチDEXスワップ→返済を単一トランザクションでアトミックに実行し、失敗時コストゼロを実現。Jito MEVバンドル統合でフロントランニングを回避。',
+    role: 'アーキテクチャ設計 / Rustバックエンド / オンチェーンプログラム',
+    highlights: [
+      'Cargoワークスペース9クレート分割（dex-core, path-finder, strategy等）',
+      'petgraphによるグラフベースの最適アービトラージパス探索',
+      'Yellowstone gRPCでプール変動をリアルタイム検出',
+      'オンチェーンProfit Guard PDAで利益不足時にTX自動リバート',
+      'DirectCPIでJupiter API排除、40-75K CU/swapのレイテンシ実現',
+      'Prometheus + Grafanaでメトリクス監視',
+    ],
+    tags: ['Rust', 'Anchor', 'Solana', 'Yellowstone gRPC', 'Jito MEV', 'petgraph', 'Prometheus', 'Docker'],
     accent: '#f472b6',
+    url: 'https://github.com/XxxKMSxxX/bitflush',
   },
   {
-    id: 'agent-platform',
-    title: 'AI Agent Runtime',
-    subtitle: '自律実行AIエージェント基盤',
-    description: 'Rust × axum × WASMで構築した自律AIエージェント実行基盤。マルチクレート構成で拡張性と安全性を両立し、プラグインをWASMサンドボックスで安全に実行。',
-    role: 'アーキテクチャ設計 / Rust実装',
-    highlights: ['WASMサンドボックスによるプラグイン隔離', 'マルチクレートのモジュラー設計', 'axum + Tower ミドルウェアスタック', 'PostgreSQL + pgvector でコンテキスト管理'],
-    tags: ['Rust', 'axum', 'WASM', 'PostgreSQL', 'pgvector', 'Tower'],
-    accent: '#f97316',
+    id: 'oversee',
+    title: 'OVERSEE — Demand Forecast Platform',
+    subtitle: '戦略素材の需要予測AIプラットフォーム',
+    description: '鉄鋼・アルミニウム・セメント等の戦略的素材の需要を予測するエンタープライズ向けプラットフォーム。UN Comtrade・EIA・worldsteel等の外部データを統合し、Medallionアーキテクチャで段階的にデータ品質を向上。',
+    role: 'フルスタック / MLパイプライン / インフラ / データ基盤設計',
+    highlights: [
+      'DDD + Medallionアーキテクチャ（Bronze→Silver→Gold）',
+      'XGBoost / LightGBM / CatBoost / Prophet / PyTorch（GNN含む）のアンサンブル',
+      'Apache Airflow 3.0によるDAGベースのデータパイプライン自動化',
+      'FastAPI + dependency-injector によるDI構成のAPIサーバー',
+      'Dify API連携のストリーミングチャット機能（フロントエンド）',
+      'Next.js 15 + Zustand + Recharts によるダッシュボードUI',
+    ],
+    tags: ['Python', 'FastAPI', 'XGBoost', 'PyTorch', 'Airflow', 'PostgreSQL', 'Redis', 'Next.js', 'AWS ECS'],
+    accent: '#00f0ff',
+    url: 'https://github.com/XxxKMSxxX/oversee-demand-forecast-api',
   },
   {
-    id: 'realestate',
-    title: 'Real Estate Risk Analyzer',
-    subtitle: '不動産リスク分析AI',
-    description: '政府オープンデータ × 機械学習で不動産の液状化・洪水リスクと適正価格を可視化。MCPサーバーとして外部AIエージェントから利用可能。',
-    role: 'データパイプライン / ML / API設計',
-    highlights: ['国土地理院 / ハザードマップ API 統合', 'XGBoost による価格予測モデル', 'MCPサーバー化でAIエージェント連携', 'Medallionアーキテクチャでデータ整理'],
-    tags: ['Python', 'XGBoost', 'MCP Server', 'FastAPI', 'DuckDB', 'dbt'],
-    accent: '#fbbf24',
-  },
-  {
-    id: 'pet-app',
-    title: 'Pet Care PWA',
-    subtitle: 'ペットケア記録アプリ',
-    description: '投薬・通院・健康記録を家族で共有するPWA。AIによる健康トレンド分析とレポート自動生成、プッシュ通知でリマインド。',
-    role: 'フルスタック / AI / UXデザイン',
-    highlights: ['オフラインファーストのPWA設計', 'Claude AIで健康レポート自動生成', 'Web Pushでリマインド通知', 'Turso によるマルチデバイス同期'],
-    tags: ['Next.js', 'Turso', 'Claude AI', 'PWA', 'Web Push', 'Vercel'],
+    id: 'pettas',
+    title: 'PETTAS — Pet Care PWA',
+    subtitle: 'ペットライフ管理プラットフォーム — pettas.tech',
+    description: '投薬・通院・健康記録・日記を家族で共有するPWA。Claude AIによる健康レポート自動生成とVision OCRで領収書取込。Stripeサブスクリプション課金、Web Pushリマインド、多言語対応。',
+    role: 'フルスタック / AI設計 / UXデザイン / プロダクトマネジメント',
+    highlights: [
+      'Next.js 16 App Router + Server Actionsベースの設計',
+      'Claude AI Vision + Tesseract.jsで領収書OCR（サーバー/クライアント併用）',
+      'Serwist PWA（オフラインファースト + Web Push通知）',
+      'Stripe（月額/年額/買い切り + 14日間トライアル）',
+      'BetterAuth + Google OAuthの認証基盤',
+      'Vitest + Playwright + Lighthouse CIでの品質担保',
+    ],
+    tags: ['Next.js 16', 'React 19', 'Turso', 'Claude AI', 'Stripe', 'PWA', 'Serwist', 'Cloudflare R2', 'Sentry'],
     accent: '#34d399',
+    url: 'https://pettas.tech',
+  },
+  {
+    id: 'propscout',
+    title: 'PropScout JP',
+    subtitle: '不動産リスク分析パイプライン + コンテンツ基盤',
+    description: '国土交通省の不動産取引データ6,600件超とハザードマップ（液状化・洪水・高潮）を掛け合わせ、23区の物件の「リスク調整済みコスパ」を可視化。分析結果からClaude APIで日英記事を自動生成しnote/Substackで連載。',
+    role: 'データパイプライン / ML / コンテンツ自動生成',
+    highlights: [
+      'Gradient Boostingによる価格予測モデル（R²=0.74）',
+      'Claude APIで分析結果→日英記事を自動生成',
+      'Gemini Imagen 4でサムネイル自動生成',
+      'sns-shared-libと連携しSNS自動投稿',
+      'SQLite/Turso + Drizzle ORMでデータ管理',
+      'matplotlib日英i18n対応の可視化',
+    ],
+    tags: ['Python', 'scikit-learn', 'Claude API', 'Gemini', 'Turso', 'Drizzle ORM', 'matplotlib'],
+    accent: '#fbbf24',
+    url: 'https://github.com/XxxKMSxxX/propscout-jp',
+  },
+  {
+    id: 'lp-generator',
+    title: 'LP Generator',
+    subtitle: 'Claude Codeスキル型LP生成ツール — 9,000+参考サイトDB',
+    description: 'SANKOU!・81-web.com等のデザインギャラリーから9,000件超のサイトデータをスクレイピング・構造化してTurso DBに格納。Claude Codeのグローバルスキルとして呼び出し、業種・テイスト指定でプロダクションレディなLPコードを生成。',
+    role: 'データパイプライン / ツール設計 / スキルエンジニアリング',
+    highlights: [
+      'cheerioによるHTML構造解析→テイスト・配色・フォント・セクションパターン抽出',
+      'Turso DBに6テーブル構成（サイト・テイスト・構造・パレット等）',
+      'Claude Code SKILL.mdとして配布、/lp-generatorコマンドで実行',
+      '参考サイトDBベースの実データ駆動生成',
+    ],
+    tags: ['TypeScript', 'Bun', 'Turso', 'cheerio', 'Claude Code Skill'],
+    accent: '#8b5cf6',
+    url: 'https://github.com/XxxKMSxxX/lp-generator',
+  },
+  {
+    id: 'sns-shared-lib',
+    title: '@kms/sns-core',
+    subtitle: 'マルチSNS統一投稿ライブラリ — npm private package',
+    description: 'X・Bluesky・Threads・Instagramへの投稿を統一インターフェースで操作するTypeScriptライブラリ。プラットフォーム別レート制限のスライディングウィンドウ管理、型付きエラー階層、トークン管理の抽象化を実装。',
+    role: 'ライブラリ設計 / API統合',
+    highlights: [
+      'サブパスインポート（/x-twitter, /bluesky等）でツリーシェイキング最適化',
+      '型付きエラー階層（Auth/Api/RateLimit/Duplicate/Transient）',
+      'インメモリスライディングウィンドウでプラットフォーム別レート制限管理',
+      'tsupによるESM + CJSデュアルビルド',
+    ],
+    tags: ['TypeScript', 'tsup', 'Vitest', 'X API', 'AT Protocol', 'Threads API', 'GitHub Packages'],
+    accent: '#06b6d4',
+    url: 'https://github.com/XxxKMSxxX/sns-shared-lib',
   },
 ];
 ---
@@ -79,8 +123,8 @@ const projects = [
       </h2>
     </div>
     <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-xl mb-16 md:mb-24">
-      業務・個人開発を問わず、設計からデプロイまで一貫して手がけたプロジェクト。
-      すべてのプロジェクトでアーキテクチャ選定から技術的意思決定をリードしています。
+      すべてのプロジェクトでアーキテクチャ選定から実装・運用まで一貫して担当。<br />
+      ソースコードはGitHubで公開しています。
     </p>
 
     <!-- Project list -->
@@ -96,7 +140,7 @@ const projects = [
             ></div>
 
             <div class="relative">
-              <!-- Header: number + title + role -->
+              <!-- Header -->
               <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-12 mb-4 md:mb-6">
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
@@ -106,12 +150,17 @@ const projects = [
                     <div class="w-4 h-px bg-white/10 group-hover:w-8 transition-all duration-500"></div>
                     <span class="text-[10px] tracking-[0.15em] text-white/15 uppercase hidden md:inline">{project.role}</span>
                   </div>
-                  <h3 class="font-heading text-xl md:text-2xl lg:text-3xl font-medium leading-tight group-hover:text-white transition-colors duration-500">
-                    {project.title}
-                  </h3>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 group/title">
+                    <h3 class="font-heading text-xl md:text-2xl lg:text-3xl font-medium leading-tight group-hover:text-white transition-colors duration-500">
+                      {project.title}
+                    </h3>
+                    <svg width="14" height="14" viewBox="0 0 10 10" fill="none" class="stroke-current text-white/10 group-hover/title:text-white/40 transition-all duration-400 flex-shrink-0">
+                      <path d="M1 1H9M9 1V9M9 1L1 9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                    </svg>
+                  </a>
                   <p class="text-xs text-white/25 mt-1 tracking-wide group-hover:text-white/40 transition-colors duration-500">{project.subtitle}</p>
                 </div>
-                <!-- Tags (top-right on desktop) -->
+                <!-- Tags -->
                 <div class="flex flex-wrap md:justify-end gap-1.5 mt-2 md:mt-1 md:max-w-xs">
                   {project.tags.map(tag => (
                     <span class="text-[9px] tracking-[0.08em] text-white/15 uppercase px-2 py-0.5 border border-white/[0.04] rounded-sm group-hover:border-white/[0.08] group-hover:text-white/30 transition-all duration-500">
@@ -121,7 +170,7 @@ const projects = [
                 </div>
               </div>
 
-              <!-- Body: description + highlights -->
+              <!-- Body -->
               <div class="grid md:grid-cols-2 gap-4 md:gap-12">
                 <p class="text-sm text-white/30 leading-[1.8] font-light group-hover:text-white/50 transition-colors duration-500">
                   {project.description}

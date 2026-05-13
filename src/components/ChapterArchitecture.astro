@@ -1,48 +1,52 @@
 ---
 const architecturePatterns = [
   {
-    title: 'Microservices / Modular Monolith',
+    title: 'Medallion Data Architecture',
     accent: '#00f0ff',
-    description: 'ドメイン境界に基づいてサービスを分割。初期はモジュラーモノリスで素早くリリースし、スケール要件に応じてマイクロサービスへ段階的に分離するアプローチ。',
+    description: 'OVERSEEの需要予測基盤で採用。UN Comtrade等の外部データをBronze→Silver→Goldの3層で段階的に品質向上し、MLモデルに供給するデータパイプラインを設計・運用。',
     details: [
-      'DDD（ドメイン駆動設計）で境界コンテキストを定義',
-      'gRPC / GraphQL Federation でサービス間通信',
-      'イベントドリブンで疎結合な非同期連携',
-      'サーキットブレーカー / リトライ / バルクヘッドで耐障害性を確保',
+      'Apache Airflow DAGによるBronze→Silver→Gold自動パイプライン',
+      'DDD（ドメイン駆動設計）でデータドメインを分離',
+      'XGBoost / LightGBM / Prophet / PyTorch GNNのアンサンブル予測',
+      'FastAPI + dependency-injectorによるDI構成のAPI層',
     ],
+    project: 'OVERSEE',
   },
   {
-    title: 'Event-Driven Architecture',
-    accent: '#8b5cf6',
-    description: 'Apache Kafka / SQS をバックボーンに、イベントソーシング + CQRS で書き込みと読み取りを分離。リアルタイム性とスケーラビリティを両立する設計。',
+    title: 'Multi-Crate Workspace (Rust)',
+    accent: '#f472b6',
+    description: 'bitflush（SolanaアービトラージBot）で採用。9クレートに責務分割し、オンチェーンプログラム・パス探索・DEXクライアント・戦略エンジンを疎結合に構成。',
     details: [
-      'Kafka によるイベントストリーミング基盤',
-      'CQRS で読み書き最適化（PostgreSQL + DuckDB）',
-      'Outbox パターンでトランザクション整合性を保証',
-      'Dead Letter Queue + 自動リトライで障害回復',
+      'Cargoワークスペースで9クレート分割（dex-core, path-finder, strategy等）',
+      'DirectCPIでJupiter API排除し40-75K CU/swapのレイテンシ実現',
+      'Profit Guard PDA でオンチェーン利益検証・自動リバート',
+      'Yellowstone gRPC + tonic でリアルタイムプール変動検出',
     ],
+    project: 'bitflush',
   },
   {
-    title: 'AI Agent Architecture',
+    title: 'PWA + Server Actions Architecture',
     accent: '#34d399',
-    description: 'LLMを核とした自律エージェントの設計パターン。ツール呼び出し・マルチステップ推論・メモリ管理を構造化し、信頼性の高いAIシステムを構築。',
+    description: 'PETTAS（ペットケアPWA）で採用。Next.js 16 App Router + Server Actionsを軸に、オフラインファースト・プッシュ通知・サブスクリプション課金を統合した現代的なフルスタック設計。',
     details: [
-      'ReAct / Plan-and-Execute パターンでマルチステップ推論',
-      'RAG（検索拡張生成）+ pgvector でコンテキスト注入',
-      'MCP Server で外部ツール・APIを統合',
-      'Guardrails / Evaluation で出力品質を担保',
+      'Serwistによるサービスワーカー管理（オフライン + Web Push）',
+      'Claude AI Vision + Tesseract.jsのサーバー/クライアント併用OCR',
+      'Stripe Checkout（月額/年額/買い切り + 14日間トライアル）',
+      'BetterAuth + Google OAuth + Turso (libSQL) による認証・DB層',
     ],
+    project: 'PETTAS',
   },
   {
-    title: 'Data Platform (Medallion)',
+    title: 'AI-Driven Content Pipeline',
     accent: '#fbbf24',
-    description: 'Bronze → Silver → Gold のMedallionアーキテクチャでデータレイクを構築。ELTパイプラインで生データから分析可能な状態まで段階的に品質を向上。',
+    description: 'PropScout JPで採用。政府オープンデータ取得→ML分析→可視化→Claude AIによる記事自動生成→SNS投稿までの一気通貫パイプラインを構築。',
     details: [
-      'Meltano (Singer) で多様なデータソースからEL',
-      'dbt でSQL変換・テスト・ドキュメント自動生成',
-      'Great Expectations でデータ品質チェック自動化',
-      'Airflow / Dagster でオーケストレーション',
+      'scikit-learn Gradient Boostingによる価格予測（R²=0.74）',
+      'Claude APIで分析結果→日英記事を自動生成',
+      'Gemini Imagen 4でサムネイル自動生成',
+      'sns-shared-lib連携でX/Bluesky/Threadsへ自動投稿',
     ],
+    project: 'PropScout JP',
   },
 ];
 
@@ -50,17 +54,32 @@ const devPractices = [
   {
     title: 'Infrastructure as Code',
     icon: 'i-simple-icons-terraform',
-    items: ['Terraform でマルチAZ / マルチリージョン構成', 'Kubernetes (EKS) + Helm でコンテナオーケストレーション', 'ArgoCD による GitOps 自動デプロイ', 'Datadog / CloudWatch でオブザーバビリティ'],
+    items: [
+      'Terraform (HCL) でAWSインフラをコード管理（Cryptra-Infra, TradeDataProcessor）',
+      'Kubernetes + Helm + helmfileでコンテナオーケストレーション（k8s-infrastructure）',
+      'Docker Composeで開発環境統一（bitflush: offchain + Prometheus + Grafana）',
+      'AWS ECS / Amplify / Vercel を用途別に使い分け',
+    ],
   },
   {
-    title: 'CI/CD & Quality',
-    icon: 'i-simple-icons-githubactions',
-    items: ['GitHub Actions でビルド・テスト・デプロイを自動化', 'TDD（テスト駆動開発）でリグレッション防止', 'ESLint / Clippy / mypy で静的解析', 'Playwright / Vitest でE2E + ユニットテスト'],
+    title: 'Testing & Quality',
+    icon: 'i-simple-icons-vitest',
+    items: [
+      'bitflush: 854テストでアービトラージロジックの網羅的検証',
+      'PETTAS: Vitest + Playwright + Lighthouse CIの3層テスト',
+      'sns-shared-lib: Vitest + coverage-v8で品質担保',
+      'mypy (strict) / Clippy / ESLint による静的解析徹底',
+    ],
   },
   {
-    title: 'Security & Reliability',
-    icon: 'i-simple-icons-letsencrypt',
-    items: ['OWASP Top 10 に基づくセキュリティ設計', 'RBAC / ABAC による細粒度アクセス制御', 'WAF + Rate Limiting + DDoS対策', 'ゼロダウンタイムデプロイ（Blue-Green / Canary）'],
+    title: 'Monitoring & Security',
+    icon: 'i-simple-icons-prometheus',
+    items: [
+      'Prometheus + Grafanaでbitflushのメトリクスリアルタイム監視',
+      'Sentry + Vercel Analyticsでフロントエンドエラー追跡（PETTAS）',
+      'keypair zeroizeによるオンチェーン秘密鍵のメモリ安全対策',
+      'jemalloc（tikv-jemallocator）でメモリフラグメンテーション対策',
+    ],
   },
 ];
 ---
@@ -69,7 +88,7 @@ const devPractices = [
   <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12">
     <!-- Section number -->
     <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
-      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">02.5</span>
+      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">03</span>
       <div class="w-8 h-px bg-white/10"></div>
       <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Architecture</span>
     </div>
@@ -81,23 +100,24 @@ const devPractices = [
       </h2>
     </div>
     <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-xl mb-16 md:mb-24">
-      「どの技術を使うか」より「どう設計するか」がプロダクトの寿命を決める。<br />
-      要件に応じて最適なアーキテクチャパターンを選定し、進化可能な設計を構築します。
+      実際のプロダクトで採用・運用してきたアーキテクチャパターン。<br />
+      要件に応じて最適な設計を選び、進化可能なシステムを構築します。
     </p>
 
     <!-- Architecture patterns -->
     <div class="space-y-6 md:space-y-8 mb-24 md:mb-32">
-      {architecturePatterns.map((pattern, i) => (
+      {architecturePatterns.map((pattern) => (
         <div class="cin-reveal arch-card group">
           <div class="line-h w-full"></div>
           <div class="py-6 md:py-10 px-2 md:px-6 -mx-2 md:-mx-6 rounded-lg transition-all duration-500 hover:bg-white/[0.015]">
             <div class="grid md:grid-cols-12 gap-4 md:gap-8">
               <!-- Title col -->
               <div class="md:col-span-4">
-                <div class="flex items-center gap-2.5 mb-3">
+                <div class="flex items-center gap-2.5 mb-2">
                   <div class="w-2 h-2 rounded-full flex-shrink-0" style={`background: ${pattern.accent};`}></div>
                   <h3 class="font-heading text-base md:text-lg font-medium leading-tight">{pattern.title}</h3>
                 </div>
+                <p class="text-[10px] tracking-[0.1em] text-white/15 uppercase mb-3">Applied in: {pattern.project}</p>
                 <p class="text-[13px] text-white/30 leading-[1.7] font-light group-hover:text-white/45 transition-colors duration-500">
                   {pattern.description}
                 </p>
