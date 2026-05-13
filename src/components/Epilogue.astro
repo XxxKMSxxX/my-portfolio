@@ -10,7 +10,7 @@ const capabilities = [
   'AIエージェント / RAG / ML パイプライン構築',
   'ブロックチェーン・DeFi開発',
   'データ基盤設計・ELTパイプライン',
-  'CTO / テックリードとしての技術組織づくり',
+  'CPO兼CTO / テックリードとしての技術組織づくり',
 ];
 ---
 
@@ -18,9 +18,9 @@ const capabilities = [
   <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12">
     <!-- Section number -->
     <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
-      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">05</span>
+      <span class="text-[10px] tracking-[0.3em] text-white/50 font-mono">05</span>
       <div class="w-8 h-px bg-white/10"></div>
-      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Contact</span>
+      <span class="text-[10px] tracking-[0.2em] text-white/50 uppercase">Contact</span>
     </div>
 
     <!-- CTA -->
@@ -30,7 +30,7 @@ const capabilities = [
       </h2>
     </div>
 
-    <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-lg mb-12 md:mb-16">
+    <p class="cin-reveal cin-delay-1 mask-reveal text-sm text-white/50 font-light leading-relaxed max-w-lg mb-12 md:mb-16">
       プロダクト開発、技術顧問、AI導入支援など、お気軽にご連絡ください。<br />
       以下の領域でお力になれます。
     </p>
@@ -38,10 +38,10 @@ const capabilities = [
     <div class="grid md:grid-cols-2 gap-12 md:gap-16 mb-16 md:mb-20">
       <!-- What I can do -->
       <div class="cin-reveal cin-delay-2">
-        <h3 class="text-xs tracking-[0.2em] text-white/20 uppercase mb-6">What I Can Do</h3>
+        <h3 class="text-xs tracking-[0.2em] text-white/50 uppercase mb-6">What I Can Do</h3>
         <ul class="space-y-3">
           {capabilities.map(cap => (
-            <li class="flex items-start gap-3 text-sm text-white/35 font-light leading-relaxed">
+            <li class="flex items-start gap-3 text-sm text-white/50 font-light leading-relaxed">
               <span class="w-1 h-1 rounded-full bg-[#34d399]/40 mt-2 flex-shrink-0"></span>
               <span>{cap}</span>
             </li>
@@ -51,7 +51,7 @@ const capabilities = [
 
       <!-- Links -->
       <div class="cin-reveal cin-delay-3">
-        <h3 class="text-xs tracking-[0.2em] text-white/20 uppercase mb-6">Find Me</h3>
+        <h3 class="text-xs tracking-[0.2em] text-white/50 uppercase mb-6">Find Me</h3>
         <div class="space-y-4">
           {links.map(link => (
             <a
@@ -61,9 +61,9 @@ const capabilities = [
               data-mouse-target={link.label.toUpperCase()}
               class="contact-link group flex items-center gap-4 py-3 px-4 -mx-4 rounded-lg transition-all duration-500 hover:bg-white/[0.02]"
             >
-              <span class={`${link.icon} text-lg text-white/20 group-hover:text-white/60 transition-colors duration-500`}></span>
+              <span class={`${link.icon} text-lg text-white/50 group-hover:text-white/60 transition-colors duration-500`}></span>
               <span class="text-base tracking-[0.05em] text-white/40 group-hover:text-white transition-colors duration-500">{link.label}</span>
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="ml-auto stroke-current text-white/10 group-hover:text-white/40 transition-all duration-500 translate-x-0 group-hover:translate-x-1">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="ml-auto stroke-current text-white/10 group-hover:text-white/60 transition-all duration-500 translate-x-0 group-hover:translate-x-1">
                 <path d="M1 1H9M9 1V9M9 1L1 9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
               </svg>
             </a>
@@ -71,12 +71,12 @@ const capabilities = [
         </div>
 
         <!-- Status -->
-        <div class="mt-8 p-4 rounded-lg border border-white/[0.04] bg-white/[0.01]">
+        <div class="mt-8 p-4 rounded-lg border border-white/[0.07] bg-white/[0.01]">
           <div class="flex items-center gap-2 mb-2">
             <div class="w-2 h-2 rounded-full bg-[#34d399]/60 shadow-[0_0_6px_rgba(52,211,153,0.3)]"></div>
             <span class="text-xs tracking-[0.1em] text-white/40">Available for new projects</span>
           </div>
-          <p class="text-[11px] text-white/20 font-light leading-relaxed">
+          <p class="text-[11px] text-white/50 font-light leading-relaxed">
             正社員・業務委託・技術顧問いずれの形態もご相談可能です。
           </p>
         </div>
@@ -91,13 +91,13 @@ const capabilities = [
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
     <div>
       <p class="font-heading text-sm font-medium tracking-[0.05em]">Kimura Shun</p>
-      <p class="text-[11px] text-white/20 mt-1 tracking-[0.05em]">Full-Stack Engineer &times; AI Architect</p>
-      <p class="text-[10px] text-white/15 mt-0.5">&copy; {new Date().getFullYear()} All rights reserved.</p>
+      <p class="text-[11px] text-white/50 mt-1 tracking-[0.05em]">Full-Stack Engineer &times; AI Architect</p>
+      <p class="text-[10px] text-white/25 mt-0.5">&copy; {new Date().getFullYear()} All rights reserved.</p>
     </div>
     <div class="text-left md:text-right">
-      <p class="text-[10px] tracking-[0.15em] text-white/15 uppercase mb-1">Tokyo, Japan</p>
-      <p class="text-[11px] text-white/25 tracking-[0.1em]">35&deg;41'N, 139&deg;41'E</p>
-      <p id="footer-clock" class="text-[11px] text-white/25 tracking-[0.1em] mt-0.5 font-light" style="font-variant-numeric: tabular-nums;">--:--:--</p>
+      <p class="text-[10px] tracking-[0.15em] text-white/25 uppercase mb-1">Tokyo, Japan</p>
+      <p class="text-[11px] text-white/40 tracking-[0.1em]">35&deg;41'N, 139&deg;41'E</p>
+      <p id="footer-clock" class="text-[11px] text-white/40 tracking-[0.1em] mt-0.5 font-light" style="font-variant-numeric: tabular-nums;">--:--:--</p>
     </div>
   </div>
 </footer>

@@ -135,9 +135,9 @@ const totalSkills = skillCategories.reduce((sum, cat) => sum + cat.items.length,
   <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
     <!-- Section number -->
     <div class="cin-reveal flex items-center gap-4 mb-10 md:mb-14">
-      <span class="text-[10px] tracking-[0.3em] text-white/20 font-mono">02</span>
+      <span class="text-[10px] tracking-[0.3em] text-white/50 font-mono">02</span>
       <div class="w-8 h-px bg-white/10"></div>
-      <span class="text-[10px] tracking-[0.2em] text-white/20 uppercase">Skills</span>
+      <span class="text-[10px] tracking-[0.2em] text-white/50 uppercase">Skills</span>
     </div>
 
     <!-- Title + lead -->
@@ -147,18 +147,18 @@ const totalSkills = skillCategories.reduce((sum, cat) => sum + cat.items.length,
       </h2>
     </div>
     <div class="cin-reveal cin-delay-1 mb-14 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-      <p class="mask-reveal text-sm text-white/30 font-light leading-relaxed max-w-lg">
+      <p class="mask-reveal text-sm text-white/50 font-light leading-relaxed max-w-lg">
         フロントエンドからインフラ、AI、ブロックチェーンまで——<br class="hidden md:inline" />
         8領域・{totalSkills}+の技術スタックを横断的に扱い、プロダクトを丸ごと設計・構築します。
       </p>
       <div class="flex gap-8">
         <div class="group">
           <p class="font-heading text-2xl font-light transition-colors duration-500 group-hover:text-[#00f0ff]/60">{skillCategories.length}</p>
-          <p class="text-[10px] tracking-[0.15em] text-white/20 uppercase mt-0.5">Domains</p>
+          <p class="text-[10px] tracking-[0.15em] text-white/50 uppercase mt-0.5">Domains</p>
         </div>
         <div class="group">
           <p class="font-heading text-2xl font-light transition-colors duration-500 group-hover:text-[#8b5cf6]/60">{totalSkills}+</p>
-          <p class="text-[10px] tracking-[0.15em] text-white/20 uppercase mt-0.5">Technologies</p>
+          <p class="text-[10px] tracking-[0.15em] text-white/50 uppercase mt-0.5">Technologies</p>
         </div>
       </div>
     </div>
@@ -169,14 +169,14 @@ const totalSkills = skillCategories.reduce((sum, cat) => sum + cat.items.length,
         <div class="skill-card" data-stagger-child data-accent={cat.accent}>
           <div class="skill-card-inner">
             <!-- Category header with accent bar -->
-            <div class="mb-4 pb-3 border-b border-white/[0.06]">
+            <div class="mb-4 pb-3 border-b border-white/[0.09]">
               <div class="flex items-center gap-2.5 mb-2">
                 <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" style={`background: ${cat.accent};`}></div>
                 <h3 class="text-xs tracking-[0.15em] uppercase font-medium text-white/60">
                   {cat.title}
                 </h3>
               </div>
-              <p class="text-[11px] text-white/20 font-light leading-relaxed pl-4">
+              <p class="text-[11px] text-white/50 font-light leading-relaxed pl-4">
                 {cat.description}
               </p>
             </div>
@@ -188,7 +188,7 @@ const totalSkills = skillCategories.reduce((sum, cat) => sum + cat.items.length,
                     target="_blank"
                     rel="noopener noreferrer"
                     data-mouse-target={item.name}
-                    class="skill-link flex items-center gap-2 py-1 text-[13px] text-white/30 hover:text-white/90 transition-all duration-400 font-light group/link"
+                    class="skill-link flex items-center gap-2 py-1 text-[13px] text-white/50 hover:text-white/90 transition-all duration-400 font-light group/link"
                   >
                     {item.icon && (
                       <span class={`${item.icon} text-[13px] flex-shrink-0 opacity-20 group-hover/link:opacity-60 transition-opacity duration-400`}></span>
